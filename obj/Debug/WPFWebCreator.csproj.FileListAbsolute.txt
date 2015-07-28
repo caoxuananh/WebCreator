@@ -1,1 +1,14 @@
 C:\Users\Anh\Desktop\WPFWebCreator\bin\Debug\WPFWebCreator.exe.config
+C:\Users\Anh\Desktop\WebCreator\bin\Debug\WPFWebCreator.exe.config
+C:\Users\Anh\Desktop\WebCreator\bin\Debug\WPFWebCreator.exe
+C:\Users\Anh\Desktop\WebCreator\bin\Debug\WPFWebCreator.pdb
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.csprojResolveAssemblyReference.cache
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\MainWindow.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\MainWindow.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\App.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator_MarkupCompile.cache
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.g.resources
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.Properties.Resources.resources
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.csproj.GenerateResource.Cache
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.exe
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.pdb

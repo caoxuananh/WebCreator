@@ -1,8 +1,133 @@
 ﻿<Window x:Class="WPFWebCreator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Height="400" Width="525" ResizeMode="NoResize" Title="Simple Web Creator v1.1">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         
+        <TabControl>            
+            <TabItem Header="Site">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5*" />                        
+                    </Grid.RowDefinitions>
+                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                        <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Themes:" />
+                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Dark"/>
+                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Light"/>
+                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Blue"/>
+                    </WrapPanel>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="3*" />                                                           
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button Margin="2" Background="White" Content="Header" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
+                        <Button Margin="2" Background="White" Content="Page" Grid.Row="1" Grid.Column="0" />
+                        <Button Margin="2" Background="White" Content="Right Panel" Grid.Row="1" Grid.Column="1" />
+                        <Button Margin="2" Background="White" Content="Footer" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" />
+                    </Grid>
+                </Grid>                
+            </TabItem>
+            <TabItem Header="Pages Manager">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ListView Name="LvPage" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="100" Header="Filename*" />
+                                <GridViewColumn Width="100" Header="Title*" />                                
+                                <GridViewColumn Width="100" Header="Right/Center*" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                    <Button Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add new page" />
+                    <Button Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove" />
+                    <Button Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit html code" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Catelogue Manager">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ListView Name="LvCategoue" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="100" Header="Name*" />
+                                <GridViewColumn Width="100" Header="Price*" />
+                                <GridViewColumn Width="100" Header="Infomation" />
+                                <GridViewColumn Width="100" Header="Image*" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add product" />
+                    <Button Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove product" />
+                    <Button Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit product" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Uploader">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />                        
+                    </Grid.RowDefinitions>
+                    
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Website address:</Label>
+                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP address:</Label>
+                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:</Label>                    
+                    <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP password:</Label>
+                    
+                    <TextBox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></TextBox>
+                    <TextBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></TextBox>
+                    <TextBox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></TextBox>
+                    <PasswordBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></PasswordBox>
+                    
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="1">Upload to server. </Button>
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2">Visit your web site</Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button BorderThickness="0" Margin="2" Background="White" Grid.Row="1" Content="View your site" />
     </Grid>
 </Window>
