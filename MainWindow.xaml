@@ -21,9 +21,9 @@
                     </Grid.RowDefinitions>
                     <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                         <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Themes:" />
-                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Dark"/>
-                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Light"/>
-                        <RadioButton Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Blue"/>
+                        <RadioButton Name="RBDark" IsChecked="True" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Dark"/>
+                        <RadioButton Name="RBLight" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Light"/>
+                        <RadioButton Name="RBBlue" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Blue"/>
                     </WrapPanel>
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -37,10 +37,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         
-                        <Button Margin="2" Background="White" Content="Header" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" />
-                        <Button Margin="2" Background="White" Content="Page" Grid.Row="1" Grid.Column="0" />
-                        <Button Margin="2" Background="White" Content="Right Panel" Grid.Row="1" Grid.Column="1" />
-                        <Button Margin="2" Background="White" Content="Footer" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" />
+                        <Button Name="BtnHeader" Margin="2" Background="White" Content="Header" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnHeader_Click" />
+                        <Button Name="BtnPage" Margin="2" Background="White" Content="Page" Grid.Row="1" Grid.Column="0" Click="BtnPage_Click" />
+                        <Button Name="BtnRight" Margin="2" Background="White" Content="Right Panel" Grid.Row="1" Grid.Column="1" Click="BtnRight_Click" />
+                        <Button Name="BtnFooter" Margin="2" Background="White" Content="Footer" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnFooter_Click" />
                     </Grid>
                 </Grid>                
             </TabItem>
@@ -128,6 +128,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button BorderThickness="0" Margin="2" Background="White" Grid.Row="1" Content="View your site" />
+        <Button Name="BtnPreview" BorderThickness="0" Margin="2" Background="White" Grid.Row="1" Content="View your site" Click="BtnPreview_Click" />
     </Grid>
 </Window>

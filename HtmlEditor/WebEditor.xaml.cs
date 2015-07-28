@@ -215,11 +215,11 @@ namespace WPFWebCreator
                 default:
                     break;
             }
-            
+
             using (TextWriter writer = File.CreateText(filename))
             {
                 writer.Write(Gui.GetHTML());
-            }
+            }            
         }
 
         internal void LoadSite()

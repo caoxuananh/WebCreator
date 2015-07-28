@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace WPFWebCreator
 {
@@ -23,6 +10,54 @@ namespace WPFWebCreator
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            WebEditor we = new WebEditor();
+            we.Show();
+            we.LoadHeader();
+        }
+
+        private void BtnRight_Click(object sender, RoutedEventArgs e)
+        {
+            WebEditor we = new WebEditor();
+            we.Show();
+            we.LoadRight();
+        }
+
+        private void BtnFooter_Click(object sender, RoutedEventArgs e)
+        {
+            WebEditor we = new WebEditor();
+            we.Show();
+            we.LoadFooter();
+        }
+
+        private void BtnPage_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("You can manage your pages in <Pages Manager> tab.", "Infomation", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BtnPreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (RBDark.IsChecked == true)
+            { 
+                // play dark css
+            }
+
+            if (RBLight.IsChecked == true)
+            {
+                // play light css
+            }
+
+            if (RBBlue.IsChecked == true)
+            {
+                // play blue css
+            }
+
+            WebSite.Init();
+            WebSite.GenerateSite();
+            System.Diagnostics.Process.Start(@"C:\WebEditor\yoursite\index.html");            
         }
     }
 }
