@@ -12,3 +12,16 @@ C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.Properties.Resources.res
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.csproj.GenerateResource.Cache
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.exe
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator.pdb
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator_Content.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\HtmlEditor.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\Image.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\Link.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\WebBrowser.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\HtmlEditor.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\Image.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\Link.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\WebBrowser.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\WebEditor.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator_MarkupCompile.lref
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\WebEditor.baml

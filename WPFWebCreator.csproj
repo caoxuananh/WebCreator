@@ -34,8 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +59,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\DialogBox.cs" />
+    <Compile Include="Core\Format.cs" />
+    <Compile Include="Core\Gui.cs" />
+    <Compile Include="Core\HideScriptErrors.cs" />
+    <Compile Include="Core\Initialisation.cs" />
+    <Compile Include="Core\Items.cs" />
+    <Compile Include="Core\Product.cs" />
+    <Compile Include="Core\WebSite.cs" />
+    <Page Include="HtmlEditor\HtmlEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HtmlEditor\Image.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HtmlEditor\Link.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HtmlEditor\WebBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HtmlEditor\WebEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +94,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HtmlEditor\HtmlEditor.xaml.cs">
+      <DependentUpon>HtmlEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlEditor\Image.xaml.cs">
+      <DependentUpon>Image.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlEditor\Link.xaml.cs">
+      <DependentUpon>Link.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlEditor\WebBrowser.xaml.cs">
+      <DependentUpon>WebBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HtmlEditor\WebEditor.xaml.cs">
+      <DependentUpon>WebEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -92,6 +141,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backcolor.png" />
+    <Resource Include="Images\bold.png" />
+    <Resource Include="Images\bullets.png" />
+    <Resource Include="Images\center.png" />
+    <Resource Include="Images\center2.png" />
+    <Resource Include="Images\Color.png" />
+    <Resource Include="Images\Editor.png" />
+    <Resource Include="Images\html.png" />
+    <Resource Include="Images\ident.png" />
+    <Resource Include="Images\image.png" />
+    <Resource Include="Images\italic.png" />
+    <Resource Include="Images\LeftAlign.png" />
+    <Resource Include="Images\link.png" />
+    <Resource Include="Images\new.png" />
+    <Resource Include="Images\Numbered.png" />
+    <Resource Include="Images\open.png" />
+    <Resource Include="Images\OutIdent.png" />
+    <Resource Include="Images\RightAlign.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\UnderLine.png" />
+    <Resource Include="Images\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cancel.png" />
+    <Resource Include="Resources\folder.png" />
+    <Content Include="Resources\New.html" />
+    <Resource Include="Resources\ok.png" />
+    <Resource Include="Resources\web.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
