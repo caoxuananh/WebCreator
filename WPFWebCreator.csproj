@@ -59,14 +59,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPageWindow.xaml.cs">
+      <DependentUpon>AddPageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\DialogBox.cs" />
     <Compile Include="Core\Format.cs" />
     <Compile Include="Core\Gui.cs" />
     <Compile Include="Core\HideScriptErrors.cs" />
     <Compile Include="Core\Initialisation.cs" />
     <Compile Include="Core\Items.cs" />
+    <Compile Include="Core\Page.cs" />
     <Compile Include="Core\Product.cs" />
     <Compile Include="Core\WebSite.cs" />
+    <Page Include="AddPageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HtmlEditor\HtmlEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

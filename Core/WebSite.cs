@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace WPFWebCreator
         public static Dictionary<string, string> MenuLink;
         public static string HeadTag;
         public static string BodyCenterProduct;
+        public static ObservableCollection<Page> ListOfPage;
 
         public static void Init()
         {
@@ -173,7 +175,6 @@ namespace WPFWebCreator
             }
 
             return res;
-        }
-
+        }        
     }
 }

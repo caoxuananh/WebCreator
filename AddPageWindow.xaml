@@ -1,0 +1,24 @@
+﻿<Window x:Class="WPFWebCreator.AddPageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddPageWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Label Content="Your page's name:" VerticalAlignment="Center" />
+        <Label Grid.Row="1" Content="Your page's title:" VerticalAlignment="Center" />
+        <TextBox Height="22" Name="TxtName" Grid.Column="1" VerticalAlignment="Center" />
+        <TextBox Height="22" Name="TxtTitle" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" />
+        
+        <Button BorderThickness="0" Name="BtnAdd" Content="Add" Background="White" Grid.Row="3" Click="BtnAdd_Click" />
+        <Button BorderThickness="0" Name="BtnEditor" Content="Open Editor" Background="White" Grid.Row="3" Grid.Column="1" Click="BtnEditor_Click" />
+    </Grid>
+</Window>

@@ -58,16 +58,15 @@
                     <ListView Name="LvPage" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="100" Header="Filename*" />
-                                <GridViewColumn Width="100" Header="Title*" />                                
-                                <GridViewColumn Width="100" Header="Right/Center*" />
+                                <GridViewColumn Width="100" Header="Filename*" DisplayMemberBinding="{Binding FileName}" />
+                                <GridViewColumn Width="100" Header="Title*" DisplayMemberBinding="{Binding PageTitle}" />                                                                
                             </GridView>
                         </ListView.View>
                     </ListView>
                     
-                    <Button Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add new page" />
-                    <Button Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove" />
-                    <Button Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit html code" />
+                    <Button Name="BtnAddPage" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add new page" Click="BtnAddPage_Click" />
+                    <Button Name="BtnRemovePage" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove" Click="BtnRemovePage_Click" />
+                    <Button Name="BtnEditPage" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit html code" Click="BtnEditPage_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Catelogue Manager">

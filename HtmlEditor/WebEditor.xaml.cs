@@ -222,9 +222,9 @@ namespace WPFWebCreator
             }            
         }
 
-        internal void LoadSite()
+        internal void LoadSite(string url)
         {
-            Gui.newdocumentPath(@"C:\WebEditor\yoursite\index.html");
+            Gui.newdocumentPath(url);
             Mode = 5;
         }
     }
