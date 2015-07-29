@@ -14,6 +14,8 @@ namespace WPFWebCreator
 
         public string Info {get; set;}
 
+        public double Price {get; set;}
+
         public string ToHtmlCode()
         {
             string htmlcode = "<div class=\"col-sm-6\"> <div class=\"thumbnail\">";
@@ -24,7 +26,7 @@ namespace WPFWebCreator
 
         public override string ToString()
         {
-            return this.Name + "|" + this.Info + "|" + this.UrlOfPic;
+            return this.Name + "|" + this.Price + "|" + this.Info + "|" + this.UrlOfPic;
         }
     }
 }

@@ -15,8 +15,10 @@ namespace WPFWebCreator
             // Generate default file and initiative some variable.
             WebSite.Init();
 
+            // Bound data about Pages to List View "LvPage".
+            // Init
             WebSite.ListOfPage = new ObservableCollection<Page>();
-
+            // Read data is saved from file: site.txt
             using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
             {
                 int n = int.Parse(reader.ReadLine());
@@ -27,8 +29,27 @@ namespace WPFWebCreator
                     WebSite.ListOfPage.Add(new Page(str2, str1));
                 }
             }
-
+            // Bound it.
             LvPage.ItemsSource = WebSite.ListOfPage;
+
+            // Bound data about Product to List View "LvCategoue"
+            // Init
+            WebSite.ListOfProduct = new ObservableCollection<Product>();
+            // Read data is saved from file: product.txt
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
+            {
+                int n = int.Parse(reader.ReadLine());
+                for (int i = 0; i < n; i++)
+                {
+                    string str1 = reader.ReadLine();
+                    string str2 = reader.ReadLine();
+                    string str3 = reader.ReadLine();
+                    string str4 = reader.ReadLine();
+                    WebSite.ListOfProduct.Add(new Product() { Name=str1, Price=double.Parse(str2), Info=str3, UrlOfPic=str4 });
+                }
+            }
+            // Bound it
+            LvCategoue.ItemsSource = WebSite.ListOfProduct;
         }
 
         private void BtnHeader_Click(object sender, RoutedEventArgs e)
@@ -127,6 +148,24 @@ namespace WPFWebCreator
                 we.Show();
                 we.LoadSite(url);
             }
+            else
+                // warn user to make sure that they choosed page.
+                MessageBox.Show("You forgot choose page.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+        }
+
+        private void BtnAddPrd_Click(object sender, RoutedEventArgs e)
+        {
+            // Show window to user can add infomation about product
+        }
+
+        private void BtnRevPrd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEdtPrd_Click(object sender, RoutedEventArgs e)
+        {
 
         }        
     }

@@ -62,6 +62,9 @@
     <Compile Include="AddPageWindow.xaml.cs">
       <DependentUpon>AddPageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddProductWindow.xaml.cs">
+      <DependentUpon>AddProductWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\DialogBox.cs" />
     <Compile Include="Core\Format.cs" />
     <Compile Include="Core\Gui.cs" />
@@ -72,6 +75,10 @@
     <Compile Include="Core\Product.cs" />
     <Compile Include="Core\WebSite.cs" />
     <Page Include="AddPageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

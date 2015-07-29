@@ -83,17 +83,17 @@
                     <ListView Name="LvCategoue" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="100" Header="Name*" />
-                                <GridViewColumn Width="100" Header="Price*" />
-                                <GridViewColumn Width="100" Header="Infomation" />
-                                <GridViewColumn Width="100" Header="Image*" />
+                                <GridViewColumn Width="100" Header="Name*" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Width="100" Header="Price*" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Width="100" Header="Infomation" DisplayMemberBinding="{Binding Info}" />
+                                <GridViewColumn Width="100" Header="Image*" DisplayMemberBinding="{Binding UrlOfPic}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add product" />
-                    <Button Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove product" />
-                    <Button Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit product" />
+                    <Button Name="BtnAddPrd" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add product" Click="BtnAddPrd_Click" />
+                    <Button Name="BtnRevPrd" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove product" Click="BtnRevPrd_Click" />
+                    <Button Name="BtnEdtPrd" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit product" Click="BtnEdtPrd_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Uploader">

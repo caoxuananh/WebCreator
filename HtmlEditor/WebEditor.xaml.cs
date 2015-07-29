@@ -19,8 +19,8 @@ namespace WPFWebCreator
     /// Interaction logic for WebEditor.xaml
     /// </summary>
     public partial class WebEditor : Window, IDisposable
-    {
-        public int Mode; //0: newdocument 1: header, 2: center, 3: right, 4: footer
+    {        
+        public string Path; // link to save html code
 
         public WebEditor()
         {
@@ -29,26 +29,20 @@ namespace WPFWebCreator
 
         public void LoadHeader()
         {
-            Gui.newdocumentPath(@"C:\WebEditor\site\header.html");
-            Mode = 1;
+            Path = @"C:\WebEditor\site\header.html";
+            Gui.newdocumentPath(Path);            
         }
 
         public void LoadFooter()
         {
-            Gui.newdocumentPath(@"C:\WebEditor\site\footer.html");
-            Mode = 4;
-        }
-
-        public void LoadCenter()
-        {
-            Gui.newdocumentPath(@"C:\WebEditor\site\center.html");
-            Mode = 2;
-        }
+            Path = @"C:\WebEditor\site\footer.html";
+            Gui.newdocumentPath(Path);            
+        }        
 
         public void LoadRight()
         {
-            Gui.newdocumentPath(@"C:\WebEditor\site\right.html");
-            Mode = 3;
+            Path = @"C:\WebEditor\site\right.html";
+            Gui.newdocumentPath(Path);
         }
 
         private void SettingsBold_Click(object sender, RoutedEventArgs e)
@@ -195,28 +189,7 @@ namespace WPFWebCreator
 
         private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string filename = @"C:\WebEditor\site\";
-            switch (Mode)
-            {
-                case 1:
-                    filename += "header.html";
-                    break;
-                case 2:
-                    filename += "center.html";
-                    break;
-                case 3:
-                    filename += "right.html";
-                    break;
-                case 4:
-                    filename += "footer.html";
-                    break;
-                case 5:
-                    return;
-                default:
-                    break;
-            }
-
-            using (TextWriter writer = File.CreateText(filename))
+            using (TextWriter writer = File.CreateText(Path))
             {
                 writer.Write(Gui.GetHTML());
             }            
@@ -224,8 +197,8 @@ namespace WPFWebCreator
 
         internal void LoadSite(string url)
         {
-            Gui.newdocumentPath(url);
-            Mode = 5;
+            Path = url;
+            Gui.newdocumentPath(Path);                        
         }
     }
 }

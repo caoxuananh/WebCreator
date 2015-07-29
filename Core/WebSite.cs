@@ -19,6 +19,7 @@ namespace WPFWebCreator
         public static string HeadTag;
         public static string BodyCenterProduct;
         public static ObservableCollection<Page> ListOfPage;
+        public static ObservableCollection<Product> ListOfProduct;
 
         public static void Init()
         {
