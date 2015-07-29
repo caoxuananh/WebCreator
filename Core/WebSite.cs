@@ -10,16 +10,18 @@ namespace WPFWebCreator
 {
     public static class WebSite
     {
-        public static string HomePath;
-        public static string BodyHeader;
-        public static string BodyCenter;
-        public static string BodyRight;
-        public static string BodyFooter;
-        public static Dictionary<string, string> MenuLink;
-        public static string HeadTag;
-        public static string BodyCenterProduct;
-        public static ObservableCollection<Page> ListOfPage;
-        public static ObservableCollection<Product> ListOfProduct;
+        public static string TempPath;          // temp folder, where stored file *.txt and *.html, *.css, *.js to build website
+        public static string HomePath;          // result folder, where stored website
+        public static string BodyHeader;        // code header (body in header.html)        
+        public static string BodyRight;         // code right panel (body in right.html)
+        public static string BodyFooter;        // code footer (body in footer.html)
+        public static string HeadTag;           // code tag <head></head>
+        public static string BodyCenterProduct; // code body tag in product.html
+        public static Dictionary<string, string> MenuLink;  // stored menu's link, will be removed after config all
+        public static string BodyCenter;        // will be removed
+        
+        public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
+        public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
 
         public static void Init()
         {
@@ -28,23 +30,51 @@ namespace WPFWebCreator
             {
                 HeadTag = reader.ReadToEnd();
             }
-
+            // khong hieu cho nay de lam gi, sau nay se quay lai sau
             using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.html"))
             {
                 BodyCenterProduct = reader.ReadToEnd();
             }
 
+            // Init temp path
+            TempPath = @"C:\WebEditor\site\";
+            // Init home path
             HomePath = @"C:\WebEditor\yoursite\";
+            // Init header
+            BodyHeader = ReadBody(TempPath + "header.html");
+            // Init footer
+            BodyFooter = ReadBody(TempPath + "footer.html");            
+            // Init right panel
+            BodyRight = ReadBody(TempPath + "right.html");
 
-            BodyHeader = ReadBody(@"C:\WebEditor\site\header.html");
-            BodyFooter = ReadBody(@"C:\WebEditor\site\footer.html");
-            BodyCenter = ReadBody(@"C:\WebEditor\site\center.html");
-            BodyRight = ReadBody(@"C:\WebEditor\site\right.html");
-
-            MenuLink = new Dictionary<string, string>();
-
-            MenuLink.Add("index.html", "Home");
-            MenuLink.Add("product.html", "Product");            
+            // Init list of page.
+            ListOfPage = new ObservableCollection<Page>();
+            // Read data is saved from file: site.txt
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
+            {
+                int n = int.Parse(reader.ReadLine());           // read number of pages
+                for (int i = 0; i < n; i++)
+                {
+                    string str1 = reader.ReadLine();            // read filename
+                    string str2 = reader.ReadLine();            // read title
+                    WebSite.ListOfPage.Add(new Page(str2, str1));
+                }
+            }
+            // Init list of product
+            ListOfProduct = new ObservableCollection<Product>();
+            // Read data is saved from file: product.txt
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
+            {
+                int n = int.Parse(reader.ReadLine());       // read number of products
+                for (int i = 0; i < n; i++)
+                {
+                    string str1 = reader.ReadLine();        // read name
+                    string str2 = reader.ReadLine();        // read price
+                    string str3 = reader.ReadLine();        // read info
+                    string str4 = reader.ReadLine();        // read url of pic
+                    WebSite.ListOfProduct.Add(new Product() { Name = str1, Price = double.Parse(str2), Info = str3, UrlOfPic = str4 });
+                }
+            }
         }
 
         public static void WriteOpen(TextWriter writer)

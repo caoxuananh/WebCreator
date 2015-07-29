@@ -29,8 +29,7 @@ namespace WPFWebCreator
 
             if (doc != null)
             {
-                doc.clear();
-                doc.charset = "utf-8";
+                doc.clear();                
             }
 
             webBrowser = new WebBrowser();            
@@ -42,8 +41,7 @@ namespace WPFWebCreator
             if (url == "")
             {
                 webBrowser.NavigateToString(Properties.Resources.New);
-                doc = webBrowser.Document as HTMLDocument;
-                doc.charset = "utf-8";
+                doc = webBrowser.Document as HTMLDocument;                
                 doc.designMode = "On";
                 Format.doc = doc;
                 return;
@@ -53,8 +51,7 @@ namespace WPFWebCreator
                 webBrowser.Navigate(url);
             }
 
-            doc = webBrowser.Document as HTMLDocument;
-            doc.charset = "utf-8";
+            doc = webBrowser.Document as HTMLDocument;            
             Format.doc = doc;
         }
 

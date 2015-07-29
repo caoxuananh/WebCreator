@@ -14,63 +14,40 @@ namespace WPFWebCreator
             InitializeComponent();
             // Generate default file and initiative some variable.
             WebSite.Init();
-
-            // Bound data about Pages to List View "LvPage".
-            // Init
-            WebSite.ListOfPage = new ObservableCollection<Page>();
-            // Read data is saved from file: site.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
-            {
-                int n = int.Parse(reader.ReadLine());
-                for (int i = 0; i < n; i++)
-                {
-                    string str1 = reader.ReadLine();
-                    string str2 = reader.ReadLine();
-                    WebSite.ListOfPage.Add(new Page(str2, str1));
-                }
-            }
-            // Bound it.
+            // Bound data about Pages to List View "LvPage".            
             LvPage.ItemsSource = WebSite.ListOfPage;
-
-            // Bound data about Product to List View "LvCategoue"
-            // Init
-            WebSite.ListOfProduct = new ObservableCollection<Product>();
-            // Read data is saved from file: product.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
-            {
-                int n = int.Parse(reader.ReadLine());
-                for (int i = 0; i < n; i++)
-                {
-                    string str1 = reader.ReadLine();        // read name
-                    string str2 = reader.ReadLine();        // read price
-                    string str3 = reader.ReadLine();        // read info
-                    string str4 = reader.ReadLine();        // read url of pic
-                    WebSite.ListOfProduct.Add(new Product() { Name=str1, Price=double.Parse(str2), Info=str3, UrlOfPic=str4 });
-                }
-            }
-            // Bound it
+            // Bound data about Product to List View "LvCategoue"                        
             LvCategoue.ItemsSource = WebSite.ListOfProduct;
         }
 
         private void BtnHeader_Click(object sender, RoutedEventArgs e)
         {
+            // create url link to temp file header.html
+            string url = WebSite.TempPath + "header.html";
+            // open web editor and navigate it to url
             WebEditor we = new WebEditor();
             we.Show();
-            we.LoadHeader();
+            we.LoadSite(url);
         }
 
         private void BtnRight_Click(object sender, RoutedEventArgs e)
         {
+            // create url link to temp file header.html
+            string url = WebSite.TempPath + "right.html";
+            // open web editor and navigate it to url
             WebEditor we = new WebEditor();
             we.Show();
-            we.LoadRight();
+            we.LoadSite(url);
         }
 
         private void BtnFooter_Click(object sender, RoutedEventArgs e)
         {
+            // create url link to temp file header.html
+            string url = WebSite.TempPath + "footer.html";
+            // open web editor and navigate it to url
             WebEditor we = new WebEditor();
             we.Show();
-            we.LoadFooter();
+            we.LoadSite(url);
         }
 
         private void BtnPage_Click(object sender, RoutedEventArgs e)
@@ -80,6 +57,8 @@ namespace WPFWebCreator
 
         private void BtnPreview_Click(object sender, RoutedEventArgs e)
         {
+            // change theme (by change css properties)
+
             if (RBDark.IsChecked == true)
             { 
                 // play dark css
@@ -94,9 +73,15 @@ namespace WPFWebCreator
             {
                 // play blue css
             }
-            
+
+            // build your web site
             WebSite.GenerateSite();
-            System.Diagnostics.Process.Start(@"C:\WebEditor\yoursite\index.html");            
+
+            // create home page link
+            string url = WebSite.HomePath + "index.html";
+
+            // call def. browser, navigate to url
+            System.Diagnostics.Process.Start(url);            
         }
 
         private void BtnAddPage_Click(object sender, RoutedEventArgs e)
@@ -105,17 +90,7 @@ namespace WPFWebCreator
             AddPageWindow window = new AddPageWindow();
             window.ShowDialog();
             // set selected item to new item
-            LvPage.SelectedIndex = WebSite.ListOfPage.Count;
-            // update site.txt
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
-            {
-                writer.WriteLine(WebSite.ListOfPage.Count);
-                foreach (Page p in WebSite.ListOfPage)
-                {
-                    writer.WriteLine(p.PageTitle);
-                    writer.WriteLine(p.FileName);
-                }
-            }
+            LvPage.SelectedIndex = WebSite.ListOfPage.Count;            
         }
 
         private void BtnRemovePage_Click(object sender, RoutedEventArgs e)
@@ -132,17 +107,7 @@ namespace WPFWebCreator
                     LvPage.SelectedIndex = mark;
                 else
                     LvPage.SelectedIndex = WebSite.ListOfPage.Count - 1;
-            }
-            // update site.txt
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
-            {
-                writer.WriteLine(WebSite.ListOfPage.Count);
-                foreach (Page p in WebSite.ListOfPage)
-                {
-                    writer.WriteLine(p.PageTitle);
-                    writer.WriteLine(p.FileName);
-                }
-            }
+            }            
         }
 
         private void BtnEditPage_Click(object sender, RoutedEventArgs e)
@@ -183,18 +148,6 @@ namespace WPFWebCreator
             window.ShowDialog();
             // Set selected item
             LvCategoue.SelectedIndex = WebSite.ListOfProduct.Count;
-            // update site.txt
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
-            {
-                writer.WriteLine(WebSite.ListOfProduct.Count);
-                foreach (Product p in WebSite.ListOfProduct)
-                {
-                    writer.WriteLine(p.Name);               // write name
-                    writer.WriteLine(p.Price);              // write price
-                    writer.WriteLine(p.Info);               // write info
-                    writer.WriteLine(p.UrlOfPic);           // write url of pic
-                }
-            }  
         }
 
         private void BtnRevPrd_Click(object sender, RoutedEventArgs e)
@@ -211,19 +164,7 @@ namespace WPFWebCreator
                     LvCategoue.SelectedIndex = mark;
                 else
                     LvCategoue.SelectedIndex = WebSite.ListOfProduct.Count - 1;
-            }
-            // update site.txt
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
-            {
-                writer.WriteLine(WebSite.ListOfProduct.Count);
-                foreach (Product p in WebSite.ListOfProduct)
-                {
-                    writer.WriteLine(p.Name);               // write name
-                    writer.WriteLine(p.Price);              // write price
-                    writer.WriteLine(p.Info);               // write info
-                    writer.WriteLine(p.UrlOfPic);           // write url of pic
-                }
-            }            
+            }                        
         }
 
         private void BtnEdtPrd_Click(object sender, RoutedEventArgs e)
@@ -255,6 +196,32 @@ namespace WPFWebCreator
                 // update item
                 WebSite.ListOfProduct.RemoveAt(mark);
                 WebSite.ListOfProduct.Insert(mark, window.item);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // save list of pages to site.txt            
+            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
+            {
+                writer.WriteLine(WebSite.ListOfPage.Count);
+                foreach (Page p in WebSite.ListOfPage)
+                {
+                    writer.WriteLine(p.PageTitle);
+                    writer.WriteLine(p.FileName);
+                }
+            }
+            // save list of products to product.txt
+            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
+            {
+                writer.WriteLine(WebSite.ListOfProduct.Count);
+                foreach (Product p in WebSite.ListOfProduct)
+                {
+                    writer.WriteLine(p.Name);               // write name
+                    writer.WriteLine(p.Price);              // write price
+                    writer.WriteLine(p.Info);               // write info
+                    writer.WriteLine(p.UrlOfPic);           // write url of pic
+                }
             }
         }        
     }

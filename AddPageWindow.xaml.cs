@@ -23,8 +23,8 @@ namespace WPFWebCreator
                 MessageBox.Show("You must enter all field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                // make url by homepath + filename
-                string url = WebSite.HomePath + TxtName.Text;
+                // make url by temp path + filename
+                string url = WebSite.TempPath + TxtName.Text;
                 // create file if it isn't existed
                 if (!File.Exists(url))
                     File.Create(url);                
@@ -44,8 +44,8 @@ namespace WPFWebCreator
                 MessageBox.Show("You must enter all field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                // make url by homepath + filename
-                string url = WebSite.HomePath + TxtName.Text;
+                // make url by temp path + filename
+                string url = WebSite.TempPath + TxtName.Text;
                 // create file if it isn't existed
                 if (!File.Exists(url))
                     File.Create(url);
@@ -61,7 +61,7 @@ namespace WPFWebCreator
         private void BtnEditor_Click(object sender, RoutedEventArgs e)
         {
             // make url by homepath + filename
-            string url = WebSite.HomePath + TxtName.Text;
+            string url = WebSite.TempPath + TxtName.Text;
             // create file if it isn't existed
             if (!File.Exists(url))
                 File.Create(url);

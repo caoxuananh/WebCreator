@@ -1,10 +1,6 @@
 ﻿using mshtml;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -126,7 +122,6 @@ namespace WPFWebCreator
             htmlEditor.Editor.SelectAll();
 
             webBrowser.doc.body.innerHTML = htmlEditor.Editor.Selection.Text;
-
         }
 
         public static void ViewHTML()

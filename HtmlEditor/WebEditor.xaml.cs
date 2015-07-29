@@ -20,29 +20,11 @@ namespace WPFWebCreator
     /// </summary>
     public partial class WebEditor : Window, IDisposable
     {        
-        public string Path; // link to save html code
+        private string SavePath; // link to save html code
 
         public WebEditor()
         {
             InitializeComponent();            
-        }
-
-        public void LoadHeader()
-        {
-            Path = @"C:\WebEditor\site\header.html";
-            Gui.newdocumentPath(Path);            
-        }
-
-        public void LoadFooter()
-        {
-            Path = @"C:\WebEditor\site\footer.html";
-            Gui.newdocumentPath(Path);            
-        }        
-
-        public void LoadRight()
-        {
-            Path = @"C:\WebEditor\site\right.html";
-            Gui.newdocumentPath(Path);
         }
 
         private void SettingsBold_Click(object sender, RoutedEventArgs e)
@@ -117,7 +99,7 @@ namespace WPFWebCreator
 
         private void RibbonButtonOpenweb_Click(object sender, RoutedEventArgs e)
         {
-            webBrowserEditor.newWb(@"");
+            webBrowserEditor.newWb(@"http:\\www.anhcx.com");
         }
 
         private void SettingsFontColor_Click(object sender, RoutedEventArgs e)
@@ -189,16 +171,16 @@ namespace WPFWebCreator
 
         private void MainWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            using (TextWriter writer = File.CreateText(Path))
+            using (TextWriter writer = File.CreateText(SavePath))
             {
                 writer.Write(Gui.GetHTML());
             }            
         }
 
         internal void LoadSite(string url)
-        {
-            Path = url;
-            Gui.newdocumentPath(Path);                        
+        {            
+            Gui.newdocumentPath(url);
+            SavePath = url;
         }
     }
 }
