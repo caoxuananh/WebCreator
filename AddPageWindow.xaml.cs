@@ -25,24 +25,18 @@ namespace WPFWebCreator
                 string url = WebSite.HomePath + TxtName.Text;
                 // create file if it isn't existed
                 if (!File.Exists(url))
-                    File.Create(url);
-
-                // update site.txt
-                using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
-                {
-                    writer.WriteLine(WebSite.ListOfPage.Count);
-                    foreach (Page p in WebSite.ListOfPage)
-                    {
-                        writer.WriteLine(p.PageTitle);
-                        writer.WriteLine(p.FileName);
-                    }
-                }
+                    File.Create(url);                
 
                 // if yes, add page to our list of page in WEBSITE.
                 WebSite.ListOfPage.Add( new Page(TxtName.Text, TxtTitle.Text));                
                 // close addpagewindow, back to main window.
                 this.Hide();
             }
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+ 
         }
 
         private void BtnEditor_Click(object sender, RoutedEventArgs e)

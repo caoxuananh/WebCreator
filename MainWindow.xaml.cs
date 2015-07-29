@@ -41,10 +41,10 @@ namespace WPFWebCreator
                 int n = int.Parse(reader.ReadLine());
                 for (int i = 0; i < n; i++)
                 {
-                    string str1 = reader.ReadLine();
-                    string str2 = reader.ReadLine();
-                    string str3 = reader.ReadLine();
-                    string str4 = reader.ReadLine();
+                    string str1 = reader.ReadLine();        // read name
+                    string str2 = reader.ReadLine();        // read price
+                    string str3 = reader.ReadLine();        // read info
+                    string str4 = reader.ReadLine();        // read url of pic
                     WebSite.ListOfProduct.Add(new Product() { Name=str1, Price=double.Parse(str2), Info=str3, UrlOfPic=str4 });
                 }
             }
@@ -103,9 +103,19 @@ namespace WPFWebCreator
         {
             // show window for user can add infomation about his new page
             AddPageWindow window = new AddPageWindow();
-            window.Show();
+            window.ShowDialog();
             // set selected item to new item
             LvPage.SelectedIndex = WebSite.ListOfPage.Count;
+            // update site.txt
+            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
+            {
+                writer.WriteLine(WebSite.ListOfPage.Count);
+                foreach (Page p in WebSite.ListOfPage)
+                {
+                    writer.WriteLine(p.PageTitle);
+                    writer.WriteLine(p.FileName);
+                }
+            }
         }
 
         private void BtnRemovePage_Click(object sender, RoutedEventArgs e)
@@ -142,10 +152,12 @@ namespace WPFWebCreator
             {
                 // get string from item: form: "Title|Filename"
                 string str = LvPage.SelectedItem.ToString();
+                // seperator
                 char[] sep = { '|' };
+                // split
                 string url = WebSite.HomePath + str.Split(sep)[1];
                 WebEditor we = new WebEditor();
-                we.Show();
+                we.ShowDialog();
                 we.LoadSite(url);
             }
             else
@@ -157,16 +169,83 @@ namespace WPFWebCreator
         private void BtnAddPrd_Click(object sender, RoutedEventArgs e)
         {
             // Show window to user can add infomation about product
+            AddProductWindow window = new AddProductWindow();
+            window.ShowDialog();
+            // Set selected item
+            LvCategoue.SelectedIndex = WebSite.ListOfProduct.Count;
+            // update site.txt
+            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
+            {
+                writer.WriteLine(WebSite.ListOfProduct.Count);
+                foreach (Product p in WebSite.ListOfProduct)
+                {
+                    writer.WriteLine(p.Name);               // write name
+                    writer.WriteLine(p.Price);              // write price
+                    writer.WriteLine(p.Info);               // write info
+                    writer.WriteLine(p.UrlOfPic);           // write url of pic
+                }
+            }  
         }
 
         private void BtnRevPrd_Click(object sender, RoutedEventArgs e)
         {
-
+            // save selected index
+            int mark = LvCategoue.SelectedIndex;
+            // if item really exist
+            if (mark != -1)
+            {
+                // remove it
+                WebSite.ListOfProduct.RemoveAt(mark);
+                // set selected item
+                if (mark < WebSite.ListOfProduct.Count - 1)
+                    LvCategoue.SelectedIndex = mark;
+                else
+                    LvCategoue.SelectedIndex = WebSite.ListOfProduct.Count - 1;
+            }
+            // update site.txt
+            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
+            {
+                writer.WriteLine(WebSite.ListOfProduct.Count);
+                foreach (Product p in WebSite.ListOfProduct)
+                {
+                    writer.WriteLine(p.Name);               // write name
+                    writer.WriteLine(p.Price);              // write price
+                    writer.WriteLine(p.Info);               // write info
+                    writer.WriteLine(p.UrlOfPic);           // write url of pic
+                }
+            }            
         }
 
         private void BtnEdtPrd_Click(object sender, RoutedEventArgs e)
         {
+            // save index of item
+            int mark = LvCategoue.SelectedIndex;
+            // check if item is existed.
+            if (mark != -1)
+            { 
+                // get product from selected item.
+                Product p = LvCategoue.SelectedItem as Product;
 
+                // realize a window
+                AddProductWindow window = new AddProductWindow();                
+
+                // add infomation for this window
+                window.TxtName.Text = p.Name;               // name
+                window.TxtPrice.Text = p.Price.ToString();  // price
+                window.TxtInfo.Text = p.Info;               // info
+                window.TxtUrlPic.Text = p.UrlOfPic;         // url of pic
+                // disable add button, show save button
+                window.BtnAdd.Visibility = Visibility.Hidden;
+                window.BtnSave.Visibility = Visibility.Visible;
+                window.item = p;
+
+                // show dialog
+                window.ShowDialog();
+                
+                // update item
+                WebSite.ListOfProduct.RemoveAt(mark);
+                WebSite.ListOfProduct.Insert(mark, window.item);
+            }
         }        
     }
 }

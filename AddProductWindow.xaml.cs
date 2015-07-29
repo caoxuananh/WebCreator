@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using System.Windows.Forms;
 
 namespace WPFWebCreator
 {
@@ -19,9 +8,66 @@ namespace WPFWebCreator
     /// </summary>
     public partial class AddProductWindow : Window
     {
+        public Product item;
+
         public AddProductWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (TxtName.Text == "" || TxtPrice.Text == "" || TxtUrlPic.Text == "")
+                // warn user to fill all field needed.
+                System.Windows.MessageBox.Show("You forgot enter some data.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {
+                // update item
+                item.Name = TxtName.Text;
+                item.Price = double.Parse(TxtPrice.Text);
+                item.Info = TxtInfo.Text;
+                item.UrlOfPic = TxtUrlPic.Text;
+                // come back to main window.
+                this.Close();
+            }                                                    
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (TxtName.Text == "" || TxtPrice.Text == "" || TxtUrlPic.Text == "")
+                // warn user to fill all field needed.
+                System.Windows.MessageBox.Show("You forgot enter some data.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else
+            {              
+                // add new product to collection.
+                WebSite.ListOfProduct.Add(new Product() { Name=TxtName.Text, Price=double.Parse(TxtPrice.Text), Info=TxtInfo.Text, UrlOfPic=TxtUrlPic.Text });
+                // come back to main window.
+                this.Close();
+            }
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            // just come back to main window
+            this.Close();
+        }
+
+        private void BtnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            // open dialog for choose file
+            using (OpenFileDialog opendialog = new OpenFileDialog())
+            {
+                // add filter for files
+                opendialog.RestoreDirectory = true;
+                opendialog.Filter = "JPEG files|*.jpg|PNG files|*.png";
+                // collect result
+                DialogResult res = opendialog.ShowDialog();
+                // if user confirm ok, add text to read-only field.
+                if (res == System.Windows.Forms.DialogResult.OK)
+                {
+                    TxtUrlPic.Text = opendialog.FileName;
+                }
+            }
         }
     }
 }

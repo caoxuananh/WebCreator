@@ -27,3 +27,5 @@ C:\Users\Anh\Desktop\WebCreator\obj\Debug\WPFWebCreator_MarkupCompile.lref
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\HtmlEditor\WebEditor.baml
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\AddPageWindow.baml
 C:\Users\Anh\Desktop\WebCreator\obj\Debug\AddPageWindow.g.cs
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\AddProductWindow.baml
+C:\Users\Anh\Desktop\WebCreator\obj\Debug\AddProductWindow.g.cs
