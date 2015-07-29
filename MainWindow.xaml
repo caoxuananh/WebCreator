@@ -7,8 +7,8 @@
             <RowDefinition Height="4*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <TabControl>            
+
+        <TabControl>
             <TabItem Header="Site">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -17,7 +17,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="5*" />                        
+                        <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
                         <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Themes:" />
@@ -28,21 +28,21 @@
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*" />
-                            <RowDefinition Height="3*" />                                                           
+                            <RowDefinition Height="3*" />
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
-                        
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        
+
                         <Button Name="BtnHeader" Margin="2" Background="White" Content="Header" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnHeader_Click" />
                         <Button Name="BtnPage" Margin="2" Background="White" Content="Page" Grid.Row="1" Grid.Column="0" Click="BtnPage_Click" />
                         <Button Name="BtnRight" Margin="2" Background="White" Content="Right Panel" Grid.Row="1" Grid.Column="1" Click="BtnRight_Click" />
                         <Button Name="BtnFooter" Margin="2" Background="White" Content="Footer" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnFooter_Click" />
                     </Grid>
-                </Grid>                
+                </Grid>
             </TabItem>
             <TabItem Header="Pages Manager">
                 <Grid>
@@ -59,28 +59,29 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="100" Header="Filename*" DisplayMemberBinding="{Binding FileName}" />
-                                <GridViewColumn Width="100" Header="Title*" DisplayMemberBinding="{Binding PageTitle}" />                                                                
+                                <GridViewColumn Width="100" Header="Title*" DisplayMemberBinding="{Binding PageTitle}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    
+
                     <Button Name="BtnAddPage" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add new page" Click="BtnAddPage_Click" />
-                    <Button Name="BtnRemovePage" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove" Click="BtnRemovePage_Click" />
-                    <Button Name="BtnEditPage" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit html code" Click="BtnEditPage_Click" />
+                    <Button Name="BtnRemovePage" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove page" Click="BtnRemovePage_Click" />
+                    <Button Name="BtnEditPage" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit Page" Click="BtnEditPage_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Catelogue Manager">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="79*" />
+                        <ColumnDefinition Width="331*"/>
+                        <ColumnDefinition Width="103*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <ListView Name="LvCategoue" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+                    <ListView Name="LvCategoue" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="100" Header="Name*" DisplayMemberBinding="{Binding Name}" />
@@ -91,9 +92,9 @@
                         </ListView.View>
                     </ListView>
 
-                    <Button Name="BtnAddPrd" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add product" Click="BtnAddPrd_Click" />
-                    <Button Name="BtnRevPrd" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove product" Click="BtnRevPrd_Click" />
-                    <Button Name="BtnEdtPrd" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit product" Click="BtnEdtPrd_Click" />
+                    <Button Name="BtnAddPrd" Margin="2" Background="White" Grid.Row="0" Grid.Column="2" Content="Add product" Click="BtnAddPrd_Click" />
+                    <Button Name="BtnRevPrd" Margin="2" Background="White" Grid.Row="1" Grid.Column="2" Content="Remove product" Click="BtnRevPrd_Click" />
+                    <Button Name="BtnEdtPrd" Margin="2" Background="White" Grid.Row="2" Grid.Column="2" Content="Edit product" Click="BtnEdtPrd_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Uploader">
@@ -109,20 +110,20 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />                        
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Website address:</Label>
                     <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP address:</Label>
-                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:</Label>                    
+                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:</Label>
                     <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP password:</Label>
-                    
+
                     <TextBox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <PasswordBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></PasswordBox>
-                    
-                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="1">Upload to server. </Button>
+
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="1">Upload to server.</Button>
                     <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2">Visit your web site</Button>
                 </Grid>
             </TabItem>

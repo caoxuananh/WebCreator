@@ -147,22 +147,32 @@ namespace WPFWebCreator
 
         private void BtnEditPage_Click(object sender, RoutedEventArgs e)
         {
-            // check if item really exist
-            if (LvPage.SelectedIndex != -1)
+            // save index of item
+            int mark = LvPage.SelectedIndex;
+            // check if item is existed.
+            if (mark != -1)
             {
-                // get string from item: form: "Title|Filename"
-                string str = LvPage.SelectedItem.ToString();
-                // seperator
-                char[] sep = { '|' };
-                // split
-                string url = WebSite.HomePath + str.Split(sep)[1];
-                WebEditor we = new WebEditor();
-                we.ShowDialog();
-                we.LoadSite(url);
+                // get page from selected item.
+                Page p = LvPage.SelectedItem as Page;
+
+                // realize a window
+                AddPageWindow window = new AddPageWindow();
+
+                // add infomation for this window
+                window.TxtName.Text = p.FileName;               // name
+                window.TxtTitle.Text = p.PageTitle;             // page title
+                // disable add button, show save button
+                window.BtnAdd.Visibility = Visibility.Hidden;
+                window.BtnSave.Visibility = Visibility.Visible;
+                window.item = p;
+
+                // show dialog
+                window.ShowDialog();
+
+                // update item
+                WebSite.ListOfPage.RemoveAt(mark);
+                WebSite.ListOfPage.Insert(mark, window.item);
             }
-            else
-                // warn user to make sure that they choosed page.
-                MessageBox.Show("You forgot choose page.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
 
         }
 
