@@ -202,7 +202,7 @@ namespace WPFWebCreator
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // save list of pages to site.txt            
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\site.txt"))
+            using (TextWriter writer = File.CreateText(WebSite.TempPath + "site.txt"))
             {
                 writer.WriteLine(WebSite.ListOfPage.Count);
                 foreach (Page p in WebSite.ListOfPage)
@@ -212,7 +212,7 @@ namespace WPFWebCreator
                 }
             }
             // save list of products to product.txt
-            using (TextWriter writer = File.CreateText(@"C:\WebEditor\site\product.txt"))
+            using (TextWriter writer = File.CreateText(WebSite.TempPath + "product.txt"))
             {
                 writer.WriteLine(WebSite.ListOfProduct.Count);
                 foreach (Product p in WebSite.ListOfProduct)
