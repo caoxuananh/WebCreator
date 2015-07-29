@@ -16,9 +16,7 @@ namespace WPFWebCreator
         public static string BodyRight;         // code right panel (body in right.html)
         public static string BodyFooter;        // code footer (body in footer.html)
         public static string HeadTag;           // code tag <head></head>
-        public static string BodyCenterProduct; // code body tag in product.html
-        public static Dictionary<string, string> MenuLink;  // stored menu's link, will be removed after config all
-        public static string BodyCenter;        // will be removed
+        public static string BodyCenterProduct; // code body tag in product.html        
         
         public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
         public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
@@ -83,14 +81,14 @@ namespace WPFWebCreator
         }
 
         public static void WriteMenu(TextWriter writer)
-        {
+        {            
             writer.Write("<body>");
             writer.Write("<nav class=\"navbar navbar-inverse\">");
             writer.Write("<div class=\"container\">");
             writer.Write("<ul class=\"nav navbar-nav\">");
-            foreach (KeyValuePair<string, string> kvp in MenuLink)
+            foreach (Page p in ListOfPage)
             {
-                writer.Write("<li><a href=\"" + kvp.Key + "\">" + kvp.Value + "</a></li>");
+                writer.Write("<li><a href=\"" + p.FileName + "\">" + p.PageTitle + "</a></li>");
             }
             writer.Write("</ul>");
             writer.Write("</div>");
@@ -120,8 +118,11 @@ namespace WPFWebCreator
             writer.Write("<script type=\"text/javascript\" src=\"jquery-1.11.3.min.js\"></script><script type=\"text/javascript\" src=\"bootstrap.min.js\"></script></body></html>");            
         }
 
-        public static void WriteBody(TextWriter writer)
+        public static void WriteBody(TextWriter writer, string filename)
         {            
+            // read body code from file
+            string BodyCenter = ReadBody(filename);
+
             writer.Write("<div class=\"row\">");
             writer.Write("<div class=\"container\">");
             // body center
@@ -168,29 +169,21 @@ namespace WPFWebCreator
 
         public static void GenerateSite()
         {
-            // index.html
-            string filename = HomePath + "index.html";
-            using (TextWriter twriter = File.CreateText(filename)) 
+            // build every page
+            foreach (Page p in ListOfPage)
             {
-                WriteOpen(twriter);
-                WriteMenu(twriter);
-                WriteHeader(twriter);
-                WriteBody(twriter);
-                WriteFooter(twriter);
-                WriteEnd(twriter);
-            }
-
-            // product.html
-            filename = HomePath + "product.html";
-            using (TextWriter twriter = File.CreateText(filename))
-            {
-                WriteOpen(twriter);
-                WriteMenu(twriter);
-                WriteHeader(twriter);
-                WriteBodyProduct(twriter);
-                WriteFooter(twriter);
-                WriteEnd(twriter);
-            }            
+                string url = HomePath + p.FileName;
+                string tempUlr = TempPath + p.FileName;
+                using (TextWriter twriter = File.CreateText(url))
+                {                    
+                    WriteOpen(twriter);
+                    WriteMenu(twriter);
+                    WriteHeader(twriter);
+                    WriteBody(twriter, tempUlr);
+                    WriteFooter(twriter);
+                    WriteEnd(twriter);
+                }
+            }                        
         }
 
         private static string ReadBody(string filename)
