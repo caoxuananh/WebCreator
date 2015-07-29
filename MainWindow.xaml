@@ -113,18 +113,18 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Website address:</Label>
-                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP address:</Label>
-                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:</Label>
-                    <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP password:</Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Website address:*</Label>
+                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP address:*</Label>
+                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:*</Label>
+                    <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP password:*</Label>
 
                     <TextBox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <PasswordBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></PasswordBox>
 
-                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="1">Upload to server.</Button>
-                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2">Visit your web site</Button>
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="0" Grid.ColumnSpan="2">Upload to server.</Button>
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2" Grid.ColumnSpan="2">Visit your web site</Button>
                 </Grid>
             </TabItem>
         </TabControl>
