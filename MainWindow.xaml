@@ -9,7 +9,7 @@
         </Grid.RowDefinitions>
 
         <TabControl>
-            <TabItem Header="Site">
+            <TabItem Width="125" Header="САЙТ">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -20,10 +20,10 @@
                         <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                        <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Themes:" />
-                        <RadioButton Name="RBDark" IsChecked="True" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Dark"/>
-                        <RadioButton Name="RBLight" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Light"/>
-                        <RadioButton Name="RBBlue" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Blue"/>
+                        <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Стиль:" />
+                        <RadioButton Name="RBDark" IsChecked="True" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Тёмный"/>
+                        <RadioButton Name="RBLight" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cветлый"/>
+                        <RadioButton Name="RBBlue" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Голубой"/>
                     </WrapPanel>
                     <Grid Grid.Row="1" Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -37,14 +37,14 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Name="BtnHeader" Margin="2" Background="White" Content="Header" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnHeader_Click" />
-                        <Button Name="BtnPage" Margin="2" Background="White" Content="Page" Grid.Row="1" Grid.Column="0" Click="BtnPage_Click" />
-                        <Button Name="BtnRight" Margin="2" Background="White" Content="Right Panel" Grid.Row="1" Grid.Column="1" Click="BtnRight_Click" />
-                        <Button Name="BtnFooter" Margin="2" Background="White" Content="Footer" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnFooter_Click" />
+                        <Button Name="BtnHeader" Margin="2" Background="White" Content="Шапка" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnHeader_Click" />
+                        <Button Name="BtnPage" Margin="2" Background="White" Content="Страницы сайта" Grid.Row="1" Grid.Column="0" Click="BtnPage_Click" />
+                        <Button Name="BtnRight" Margin="2" Background="White" Content="Правый блок" Grid.Row="1" Grid.Column="1" Click="BtnRight_Click" />
+                        <Button Name="BtnFooter" Margin="2" Background="White" Content="Подвал" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Click="BtnFooter_Click" />
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Pages Manager">
+            <TabItem Width="125" Header="СТРАНИЦЫ">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
@@ -58,18 +58,18 @@
                     <ListView Name="LvPage" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="100" Header="Filename*" DisplayMemberBinding="{Binding FileName}" />
-                                <GridViewColumn Width="100" Header="Title*" DisplayMemberBinding="{Binding PageTitle}" />
+                                <GridViewColumn Width="120" Header="Имя файла*" DisplayMemberBinding="{Binding FileName}" />
+                                <GridViewColumn Width="120" Header="Название страницы*" DisplayMemberBinding="{Binding PageTitle}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Name="BtnAddPage" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Add new page" Click="BtnAddPage_Click" />
-                    <Button Name="BtnRemovePage" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Remove page" Click="BtnRemovePage_Click" />
-                    <Button Name="BtnEditPage" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Edit Page" Click="BtnEditPage_Click" />
+                    <Button Name="BtnAddPage" Margin="2" Background="White" Grid.Row="0" Grid.Column="1" Content="Добавить" Click="BtnAddPage_Click" />
+                    <Button Name="BtnRemovePage" Margin="2" Background="White" Grid.Row="1" Grid.Column="1" Content="Удалить" Click="BtnRemovePage_Click" />
+                    <Button Name="BtnEditPage" Margin="2" Background="White" Grid.Row="2" Grid.Column="1" Content="Изменить" Click="BtnEditPage_Click" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Catelogue Manager">
+            <TabItem Width="125" Header="КАТАЛОГ">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="79*" />
@@ -84,20 +84,20 @@
                     <ListView Name="LvCategoue" Margin="2" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="100" Header="Name*" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Width="100" Header="Price*" DisplayMemberBinding="{Binding Price}" />
-                                <GridViewColumn Width="100" Header="Infomation" DisplayMemberBinding="{Binding Info}" />
-                                <GridViewColumn Width="100" Header="Image*" DisplayMemberBinding="{Binding UrlOfPic}" />
+                                <GridViewColumn Width="100" Header="Название*" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Width="100" Header="Цена руб.*" DisplayMemberBinding="{Binding Price}" />
+                                <GridViewColumn Width="100" Header="Информация" DisplayMemberBinding="{Binding Info}" />
+                                <GridViewColumn Width="100" Header="Фото*" DisplayMemberBinding="{Binding UrlOfPic}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Name="BtnAddPrd" Margin="2" Background="White" Grid.Row="0" Grid.Column="2" Content="Add product" Click="BtnAddPrd_Click" />
-                    <Button Name="BtnRevPrd" Margin="2" Background="White" Grid.Row="1" Grid.Column="2" Content="Remove product" Click="BtnRevPrd_Click" />
-                    <Button Name="BtnEdtPrd" Margin="2" Background="White" Grid.Row="2" Grid.Column="2" Content="Edit product" Click="BtnEdtPrd_Click" />
+                    <Button Name="BtnAddPrd" Margin="2" Background="White" Grid.Row="0" Grid.Column="2" Content="Добавить" Click="BtnAddPrd_Click" />
+                    <Button Name="BtnRevPrd" Margin="2" Background="White" Grid.Row="1" Grid.Column="2" Content="Удалить" Click="BtnRevPrd_Click" />
+                    <Button Name="BtnEdtPrd" Margin="2" Background="White" Grid.Row="2" Grid.Column="2" Content="Изменить" Click="BtnEdtPrd_Click" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Uploader">
+            <TabItem Width="125" Header="ВЫГРУЗКА">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -113,21 +113,21 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Website address:*</Label>
-                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP address:*</Label>
-                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP username:*</Label>
-                    <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP password:*</Label>
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Адрес сайта:*</Label>
+                    <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">FTP-адрес(сервер):*</Label>
+                    <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Пользователь:*</Label>
+                    <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalContentAlignment="Center">Пароль:*</Label>
 
                     <TextBox Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <TextBox Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="20"></TextBox>
                     <PasswordBox Grid.Column="2" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="25"></PasswordBox>
 
-                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="0" Grid.ColumnSpan="2">Upload to server.</Button>
-                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2" Grid.ColumnSpan="2">Visit your web site</Button>
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="0" Grid.ColumnSpan="2">Выгрузка</Button>
+                    <Button Grid.Row="4" Background="White" BorderThickness="0" Grid.Column="2" Grid.ColumnSpan="2">Посмотр результата в Интернете</Button>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Name="BtnPreview" BorderThickness="0" Margin="2" Background="White" Grid.Row="1" Content="View your site" Click="BtnPreview_Click" />
+        <Button Name="BtnPreview" BorderThickness="0" Margin="2" Background="White" Grid.Row="1" Content="Предварительный просмотр" Click="BtnPreview_Click" />
     </Grid>
 </Window>

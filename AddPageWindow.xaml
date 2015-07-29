@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WPFWebCreator.AddPageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Page Detail" Height="200" Width="400">
+        Title="Страница" Height="200" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -15,13 +15,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <Label Grid.Column="1" Content="Your page's name:*" VerticalAlignment="Center" />
-        <Label Grid.Column="1" Grid.Row="1" Content="Your page's title:*" VerticalAlignment="Center" />
+        <Label Grid.Column="1" Content="Имя файла:*" VerticalAlignment="Center" />
+        <Label Grid.Column="1" Grid.Row="1" Content="Название страницы:*" VerticalAlignment="Center" />
         <TextBox Height="22" Name="TxtName" Grid.Column="2" VerticalAlignment="Center" />
         <TextBox Height="22" Name="TxtTitle" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
         
-        <Button BorderThickness="0" Name="BtnAdd" Content="Add" Background="White" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnAdd_Click" />
-        <Button Visibility="Hidden" BorderThickness="0" Name="BtnSave" Content="Save" Background="White" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnSave_Click" />
-        <Button BorderThickness="0" Name="BtnEditor" Content="Open Editor" Background="White" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Click="BtnEditor_Click" />
+        <Button BorderThickness="0" Name="BtnAdd" Content="ДОБАВИТЬ" Background="White" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnAdd_Click" />
+        <Button Visibility="Hidden" BorderThickness="0" Name="BtnSave" Content="СОХРАНИТЬ" Background="White" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnSave_Click" />
+        <Button BorderThickness="0" Name="BtnEditor" Content="ОТКРЫВАТЬ РЕДАКТОР" Background="White" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Click="BtnEditor_Click" />
     </Grid>
 </Window>
