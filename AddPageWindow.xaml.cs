@@ -62,18 +62,22 @@ namespace WPFWebCreator
         
         private void BtnEditor_Click(object sender, RoutedEventArgs e)
         {
+            // open webeditor and load file for editing...            
+            WebEditor we = new WebEditor();
+            we.Show();
+
             // make url by homepath + filename
             string url = WebSite.TempPath + TxtName.Text;
             // create file if it isn't existed
             if (!File.Exists(url))
             { 
-                File.WriteAllText(url, WebSite.DefaultText);
+                File.Create(url);
+                Gui.newdocument();
+                we.SavePath = url;               
             }
-
-            // open webeditor and load file for editing...
-            WebEditor we = new WebEditor();
-            we.Show();
-            we.LoadSite(url);            
+            else
+                we.LoadSite(url);
+            
         }
     }
 }

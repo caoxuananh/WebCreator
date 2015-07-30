@@ -267,7 +267,7 @@ namespace WPFWebCreator
             // create uploader
             FtpUploader.Init(TxtUsrName.Text, TxtPwd.Password, TxtFTPAdr.Text, TxtFolder.Text);
             // begin upload    
-            PBPercent.Value = 0; // reset progress bar
+            PBPercent.Value = 5; // reset progress bar
             // create work thread
             BackgroundWorker wkr = new BackgroundWorker();
             wkr.WorkerReportsProgress = true;
@@ -297,7 +297,7 @@ namespace WPFWebCreator
             int hundred = allfiles.Length;
             for (int i = 1; i < allfiles.Length + 1; i++)
             { 
-                FtpUploader.DoUpload(allfiles[i - 1]);
+                FtpUploader.DoUpload(allfiles[i-1]);
                 int percent = Convert.ToInt32((double)i / hundred * 100);
                 (sender as BackgroundWorker).ReportProgress(percent);                
             }
@@ -311,6 +311,18 @@ namespace WPFWebCreator
         void wrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show("Upload done!");
+        }
+
+        private void BtnHomePath_Click(object sender, RoutedEventArgs e)
+        {
+            using (System.Windows.Forms.FolderBrowserDialog openDialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                System.Windows.Forms.DialogResult result = openDialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    WebSite.HomePath = openDialog.SelectedPath;
+                }                
+            }
         }
     }
 }

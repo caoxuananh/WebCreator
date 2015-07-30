@@ -19,6 +19,13 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="1" Grid.Column="1">                        
+                        <TextBox IsReadOnly="True" Height="100" Margin="2" DockPanel.Dock="Top" Name="TxtHomePath">C:\WebEditor\yoursite</TextBox>
+                        <Button Name="BtnHomePath" DockPanel.Dock="Bottom" BorderThickness="1" Background="White" Margin="2" Height="100" Click="BtnHomePath_Click">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" >Изменить где сохранить ваш сайт.</TextBlock>
+                        </Button>
+                    </DockPanel>
+                    
                     <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="13" HorizontalAlignment="Center">*Нажимать кнопки для редактировать шапку, правый блок или подвал сайта.</TextBlock>
                     <WrapPanel Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">                        
                         <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Стиль:" />

@@ -10,20 +10,19 @@ namespace WPFWebCreator
 {    
     public static class WebSite
     {
-        public static string TempPath;          // temp folder, where stored file *.txt and *.html, *.css, *.js to build website
-        public static string HomePath;          // result folder, where stored website
-        public static string BodyHeader;        // code header (body in header.html)        
-        public static string BodyRight;         // code right panel (body in right.html)
-        public static string BodyFooter;        // code footer (body in footer.html)
-        public static string HeadTag;           // code tag <head></head>        
+        public static string TempPath = @"C:\WebEditor\site\";              // temp folder, where stored file *.txt and *.html, *.css, *.js to build website
+        public static string HomePath = @"C:\WebEditor\yoursite\";          // result folder, where stored website
+        public static string BodyHeader;                                    // code header (body in header.html)        
+        public static string BodyRight;                                     // code right panel (body in right.html)
+        public static string BodyFooter;                                    // code footer (body in footer.html)
+        public static string HeadTag;                                       // code tag <head></head>        
 
-        public static string StyleHeader;       // style header
-        public static string StyleFooter;       // style footer 
-        public static string StyleRight;        // style right
-        public static string DefaultText;
+        public static string StyleHeader;                                   // style header
+        public static string StyleFooter;                                   // style footer 
+        public static string StyleRight;                                    // style right
         
-        public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
-        public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
+        public static ObservableCollection<Page> ListOfPage;                // list of pages, its will be showed in middle of page, and add to menu link
+        public static ObservableCollection<Product> ListOfProduct;          // list of products in product.html
 
         public static bool HasIndexFile()
         {
@@ -37,10 +36,6 @@ namespace WPFWebCreator
 
         public static void Init()
         {
-            // Init temp path
-            TempPath = @"C:\WebEditor\site\";
-            // Init home path
-            HomePath = @"C:\WebEditor\yoursite\";
             // init head tag
             using (TextReader reader = File.OpenText(@"C:\WebEditor\site\headtag.html"))
             {
@@ -56,9 +51,6 @@ namespace WPFWebCreator
             // Init right panel
             BodyRight = ReadBody(TempPath + "right.html");
             StyleRight = ReadStyle(TempPath + "right.html");
-
-            // set default text
-            DefaultText = "<HEAD><TITLE>new</TITLE><META content=\"text/html; charset=utf-8\" http-equiv=content-type>";
         }
 
         public static void WriteOpen(TextWriter writer)

@@ -20,7 +20,7 @@ namespace WPFWebCreator
     /// </summary>
     public partial class WebEditor : Window, IDisposable
     {        
-        private string SavePath; // link to save html code
+        public string SavePath; // link to save html code
 
         public WebEditor()
         {
