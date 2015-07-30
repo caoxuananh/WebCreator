@@ -15,11 +15,20 @@ namespace WPFWebCreator
         public static string BodyHeader;        // code header (body in header.html)        
         public static string BodyRight;         // code right panel (body in right.html)
         public static string BodyFooter;        // code footer (body in footer.html)
-        public static string HeadTag;           // code tag <head></head>
-        public static string BodyCenterProduct; // code body tag in product.html        
+        public static string HeadTag;           // code tag <head></head>        
         
         public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
         public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
+
+        public static bool HasIndexFile()
+        {
+            foreach (Page p in ListOfPage)
+            {
+                if (p.FileName == "index.html" || p.FileName == "index.htm")
+                    return true;
+            }
+            return false;
+        }
 
         public static void Init()
         {
@@ -27,11 +36,6 @@ namespace WPFWebCreator
             using (TextReader reader = File.OpenText(@"C:\WebEditor\site\headtag.html"))
             {
                 HeadTag = reader.ReadToEnd();
-            }
-            // khong hieu cho nay de lam gi, sau nay se quay lai sau
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.html"))
-            {
-                BodyCenterProduct = reader.ReadToEnd();
             }
 
             // Init temp path
@@ -90,6 +94,8 @@ namespace WPFWebCreator
             {
                 writer.Write("<li><a href=\"" + p.FileName + "\">" + p.PageTitle + "</a></li>");
             }
+
+            writer.Write("<li><a href=\"" + "myproduct.html" + "\">" + "Products" + "</a></li>");
             writer.Write("</ul>");
             writer.Write("</div>");
             writer.Write("</nav>");            
@@ -151,9 +157,17 @@ namespace WPFWebCreator
             writer.Write("<div class=\"row\">");
             writer.Write("<div class=\"container\">");
             // body center
-            writer.Write("<div class=\"col-md-8\">");                
-            writer.Write(BodyCenterProduct);                                
-            writer.Write("</div>");
+            writer.Write("<div class=\"col-md-8\"><div class=\"row\">");
+            foreach (Product p in ListOfProduct)
+            {
+                writer.Write("<div class=\"col-sm-6\"><div class=\"thumbnail\">");
+                writer.Write("<img class=\"img-product\" src=\"file:" + "\\\\\\" + p.UrlOfPic + "\" alt = \"" + p.Name + "\" />");
+                writer.Write("<div class=\"caption\">");
+                writer.Write("<h4>" + p.Name + " - " + p.Price + " rub." + "</h4>");
+                writer.Write("<p>" + p.Info + "</p>");
+                writer.Write("</div></div></div>");
+            }
+            writer.Write("</div></div>");
             // body right
             writer.Write("<div class=\"col-md-4\">");
             writer.Write("<div class=\"panel panel-primary\">");
@@ -169,11 +183,13 @@ namespace WPFWebCreator
 
         public static void GenerateSite()
         {
+            string url, tempUlr;
+
             // build every page
             foreach (Page p in ListOfPage)
             {
-                string url = HomePath + p.FileName;
-                string tempUlr = TempPath + p.FileName;
+                url = HomePath + p.FileName;
+                tempUlr = TempPath + p.FileName;
                 using (TextWriter twriter = File.CreateText(url))
                 {                    
                     WriteOpen(twriter);
@@ -183,7 +199,20 @@ namespace WPFWebCreator
                     WriteFooter(twriter);
                     WriteEnd(twriter);
                 }
-            }                        
+            }
+
+            // build Product page
+            url = HomePath + "myproduct.html";
+            
+            using (TextWriter twriter = File.CreateText(url))
+            {
+                WriteOpen(twriter);
+                WriteMenu(twriter);
+                WriteHeader(twriter);
+                WriteBodyProduct(twriter);
+                WriteFooter(twriter);
+                WriteEnd(twriter);
+            }
         }
 
         private static string ReadBody(string filename)

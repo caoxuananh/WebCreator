@@ -60,32 +60,20 @@ namespace WPFWebCreator
         }
 
         private void BtnPreview_Click(object sender, RoutedEventArgs e)
-        {                        
-            // change theme (by change css properties)
-
-            if (RBDark.IsChecked == true)
-            { 
-                // play dark css
-            }
-
-            if (RBLight.IsChecked == true)
+        {
+            if (WebSite.HasIndexFile())
             {
-                // play light css
+                // create website
+                WebSite.GenerateSite();
+
+                // create home page link
+                string url = WebSite.HomePath + "index.html";
+
+                // call def. browser, navigate to url
+                System.Diagnostics.Process.Start(url);
             }
-
-            if (RBBlue.IsChecked == true)
-            {
-                // play blue css
-            }
-
-            // build your web site
-            WebSite.GenerateSite();
-
-            // create home page link
-            string url = WebSite.HomePath + "index.html";
-
-            // call def. browser, navigate to url
-            System.Diagnostics.Process.Start(url);            
+            else
+                MessageBox.Show("У вас нет index.html. Добавите index.html чтобы сайт работает нормально.");
         }
 
         private void BtnAddPage_Click(object sender, RoutedEventArgs e)
@@ -255,7 +243,16 @@ namespace WPFWebCreator
         }
 
         private void BtnUpload_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+            if (WebSite.HasIndexFile())
+            {
+                // generate site
+                WebSite.GenerateSite();                
+            }
+            else
+                MessageBox.Show("У вас нет index.html. Добавите index.html чтобы сайт работает нормально.");
+
+
             if (TxtFTPAdr.Text == "" || TxtPwd.Password == "" || TxtWebAdr.Text == "" || TxtUsrName.Text == "")
             {
                 MessageBox.Show("Проверять входить данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
