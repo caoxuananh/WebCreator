@@ -30,7 +30,7 @@ namespace WPFWebCreator
                     File.Create(url);                
 
                 // if yes, add page to our list of page in WEBSITE.
-                WebSite.ListOfPage.Add( new Page(TxtName.Text, TxtTitle.Text));                
+                WebSite.ListOfPage.Add(new Page() { FileName = TxtName.Text, PageTitle=TxtTitle.Text });                
                 // close addpagewindow, back to main window.
                 this.Close();
             }
@@ -68,7 +68,7 @@ namespace WPFWebCreator
             // open webeditor and load file for editing...
             WebEditor we = new WebEditor();
             we.Show();
-            we.LoadSite(url);
+            we.LoadSite(url);            
         }
     }
 }

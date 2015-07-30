@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WPFWebCreator
-{
+{    
     public static class WebSite
     {
         public static string TempPath;          // temp folder, where stored file *.txt and *.html, *.css, *.js to build website
@@ -16,6 +16,10 @@ namespace WPFWebCreator
         public static string BodyRight;         // code right panel (body in right.html)
         public static string BodyFooter;        // code footer (body in footer.html)
         public static string HeadTag;           // code tag <head></head>        
+
+        public static string StyleHeader;       // style header
+        public static string StyleFooter;       // style footer 
+        public static string StyleRight;        // style right
         
         public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
         public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
@@ -32,22 +36,25 @@ namespace WPFWebCreator
 
         public static void Init()
         {
-            // init head tag
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\headtag.html"))
-            {
-                HeadTag = reader.ReadToEnd();
-            }
-
             // Init temp path
             TempPath = @"C:\WebEditor\site\";
             // Init home path
             HomePath = @"C:\WebEditor\yoursite\";
+            // init head tag
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\headtag.html"))
+            {
+                HeadTag = reader.ReadToEnd();
+            }         
+
             // Init header
             BodyHeader = ReadBody(TempPath + "header.html");
+            StyleHeader = ReadStyle(TempPath + "header.html");
             // Init footer
-            BodyFooter = ReadBody(TempPath + "footer.html");            
+            BodyFooter = ReadBody(TempPath + "footer.html");
+            StyleFooter = ReadStyle(TempPath + "footer.html");
             // Init right panel
             BodyRight = ReadBody(TempPath + "right.html");
+            StyleRight = ReadStyle(TempPath + "right.html");
 
             // Init list of page.
             ListOfPage = new ObservableCollection<Page>();
@@ -58,7 +65,7 @@ namespace WPFWebCreator
                 for (int i = 0; i < n; i++)
                 {
                     string str1 = reader.ReadLine();            // read filename
-                    string str2 = reader.ReadLine();            // read title
+                    string str2 = reader.ReadLine();            // read title                    
                     WebSite.ListOfPage.Add(new Page(str2, str1));
                 }
             }
@@ -103,7 +110,7 @@ namespace WPFWebCreator
 
         public static void WriteHeader(TextWriter writer)
         {            
-            writer.Write("<div class=\"jumbotron\">");
+            writer.Write("<div " + StyleHeader + " class=\"jumbotron\">");
             writer.Write("<div class=\"container\">");                
             writer.Write(BodyHeader);                
             writer.Write("</div>");
@@ -112,7 +119,7 @@ namespace WPFWebCreator
 
         public static void WriteFooter(TextWriter writer)
         {            
-            writer.Write("<footer class=\"default-footer\">");
+            writer.Write("<footer" + StyleFooter + " class=\"default-footer\">");
             writer.Write("<div class=\"container\">");
             writer.Write(BodyFooter);
             writer.Write("</div>");
@@ -128,13 +135,14 @@ namespace WPFWebCreator
         {            
             // read body code from file
             string BodyCenter = ReadBody(filename);
+            string Style = ReadStyle(filename);
 
             writer.Write("<div class=\"row\">");
             writer.Write("<div class=\"container\">");
             // body center
             writer.Write("<div class=\"col-md-8\">");
             writer.Write("<div class=\"panel panel-primary\">");
-            writer.Write("<div class=\"panel-body\">");
+            writer.Write("<div " + Style + " class=\"panel-body\">");
             writer.Write(BodyCenter);
             writer.Write("</div>");
             writer.Write("</div>");
@@ -142,7 +150,7 @@ namespace WPFWebCreator
             // body right
             writer.Write("<div class=\"col-md-4\">");
             writer.Write("<div class=\"panel panel-primary\">");
-            writer.Write("<div class=\"panel-body\">");
+            writer.Write("<div " + StyleRight + " class=\"panel-body\">");
             writer.Write(BodyRight);
             writer.Write("</div>");
             writer.Write("</div>");
@@ -171,7 +179,7 @@ namespace WPFWebCreator
             // body right
             writer.Write("<div class=\"col-md-4\">");
             writer.Write("<div class=\"panel panel-primary\">");
-            writer.Write("<div class=\"panel-body\">");
+            writer.Write("<div " + StyleRight + " class=\"panel-body\">");
             writer.Write(BodyRight);
             writer.Write("</div>");
             writer.Write("</div>");
@@ -220,14 +228,41 @@ namespace WPFWebCreator
             string res;
             using (TextReader reader = File.OpenText(filename))
             {
-                res = reader.ReadToEnd();
-
-                int start = res.IndexOf("<body>", StringComparison.CurrentCultureIgnoreCase);
-                int end = res.IndexOf("</body>", StringComparison.CurrentCultureIgnoreCase);
-                res = res.Substring(start + 6, end - start - 6);
+                // read html document
+                string temp = reader.ReadToEnd();               
+                // find open body tag's position
+                int startBodyTag = temp.IndexOf("<body", StringComparison.CurrentCultureIgnoreCase);
+                // find end of open body tag's position
+                int endBodyTag = -1;
+                for (int i = startBodyTag; i < temp.Length; i++)
+                    if (temp.ElementAt(i) == '>')
+                    {
+                        endBodyTag = i;
+                        break;
+                    }
+               
+                int end = temp.IndexOf("</body>", StringComparison.CurrentCultureIgnoreCase);
+                res = temp.Substring(endBodyTag + 1, end - endBodyTag - 1);
             }
 
             return res;
-        }        
+        }
+
+        private static string ReadStyle(string filename)
+        {
+            using (TextReader reader = File.OpenText(filename))
+            {
+                // read html code
+                string temp = reader.ReadToEnd();
+                // find code background
+                int k = -1;
+                k = temp.IndexOf("<body style", StringComparison.CurrentCultureIgnoreCase);
+                // if not found
+                if (k == -1)
+                    return "";
+                else
+                    return temp.Substring(k + 6, 27);
+            }            
+        }
     }
 }

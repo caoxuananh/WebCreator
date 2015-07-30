@@ -63,6 +63,8 @@ namespace WPFWebCreator
         {
             if (WebSite.HasIndexFile())
             {
+                // Init 
+                WebSite.Init();
                 // create website
                 WebSite.GenerateSite();
 
@@ -246,6 +248,8 @@ namespace WPFWebCreator
         {
             if (WebSite.HasIndexFile())
             {
+                // Init 
+                WebSite.Init();
                 // generate site
                 WebSite.GenerateSite();                
             }

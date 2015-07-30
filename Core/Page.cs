@@ -9,9 +9,13 @@ namespace WPFWebCreator
     public class Page
     {
         public string FileName {get; set;}      // file name (*.html)
-        public string PageTitle {get; set;}     // page title (to display in menu)
 
-        public string BgColorCode;        
+        public string PageTitle {get; set;}     // page title (to display in menu)        
+
+        public Page()
+        {
+ 
+        }
 
         public Page(string fl, string title)
         {            

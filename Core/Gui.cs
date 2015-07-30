@@ -136,7 +136,7 @@ namespace WPFWebCreator
         public static string GetHTML()
         {
             return webBrowser.doc.documentElement.innerHTML;
-        }
+        }        
 
         public static void newdocument( )
         {
