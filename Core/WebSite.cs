@@ -165,7 +165,7 @@ namespace WPFWebCreator
             // build every page
             foreach (Page p in ListOfPage)
             {
-                url = HomePath + p.FileName;
+                url = Path.Combine(HomePath, p.FileName);
                 tempUlr = TempPath + p.FileName;
                 using (TextWriter twriter = File.CreateText(url))
                 {                    
@@ -179,7 +179,7 @@ namespace WPFWebCreator
             }
 
             // build Product page
-            url = HomePath + "myproduct.html";
+            url = Path.Combine(HomePath, "myproduct.html");
             
             using (TextWriter twriter = File.CreateText(url))
             {
@@ -232,6 +232,21 @@ namespace WPFWebCreator
                 else
                     return temp.Substring(k + 6, 27);
             }            
+        }
+
+        internal static void CopyCssFile(string des)
+        {
+            string source = TempPath + "resources";
+            string filename;
+            string desFile;
+            string[] cssFiles = Directory.GetFiles(source);
+            foreach (string s in cssFiles)
+            {
+                filename = Path.GetFileName(s);
+                desFile = Path.Combine(des, filename);
+                File.Copy(s, desFile, true);
+            }
+                
         }
     }
 }

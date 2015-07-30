@@ -23,7 +23,7 @@ namespace WPFWebCreator
             // Init list of page.
             WebSite.ListOfPage = new ObservableCollection<Page>();
             // Read data is saved from file: site.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
+            using (TextReader reader = File.OpenText(WebSite.TempPath + "site.txt"))
             {
                 int n = int.Parse(reader.ReadLine());           // read number of pages
                 for (int i = 0; i < n; i++)
@@ -36,7 +36,7 @@ namespace WPFWebCreator
             // Init list of product
             WebSite.ListOfProduct = new ObservableCollection<Product>();
             // Read data is saved from file: product.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
+            using (TextReader reader = File.OpenText(WebSite.TempPath + "product.txt"))
             {
                 int n = int.Parse(reader.ReadLine());       // read number of products
                 for (int i = 0; i < n; i++)
@@ -98,7 +98,7 @@ namespace WPFWebCreator
                 WebSite.GenerateSite();
 
                 // create home page link
-                string url = WebSite.HomePath + "index.html";
+                string url = Path.Combine(WebSite.HomePath, "index.html");
 
                 // call def. browser, navigate to url
                 System.Diagnostics.Process.Start(url);
@@ -124,7 +124,7 @@ namespace WPFWebCreator
             if (mark != -1)
             { 
                 // remove it
-                WebSite.ListOfPage.RemoveAt(mark);
+                WebSite.ListOfPage.RemoveAt(mark);                
                 // set selected item
                 if (mark < WebSite.ListOfPage.Count - 1)
                     LvPage.SelectedIndex = mark;
@@ -321,6 +321,8 @@ namespace WPFWebCreator
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
                     WebSite.HomePath = openDialog.SelectedPath;
+                    TxtHomePath.Text = WebSite.HomePath;
+                    WebSite.CopyCssFile(WebSite.HomePath);
                 }                
             }
         }

@@ -13,7 +13,8 @@ namespace WPFWebCreator
         public static string UserName;      // username                
         public static string Password;      // password
         public static string FtpServer;     // server ftp link
-        public static string SubFolder;     // sub folder        
+        public static string SubFolder;     // sub folder
+        public static string Message;       // Message about error
 
         public static void Init(string str1, string str2, string str3, string str4)
         {
@@ -49,6 +50,7 @@ namespace WPFWebCreator
             catch (WebException ex)
             {
                 return false;
+                Message = ex.Message;
             }
             return true;
         }
@@ -67,7 +69,8 @@ namespace WPFWebCreator
                 }
                 catch (WebException ex)
                 {
-                    // show message of error                    
+                    // show message of error
+                    Message = ex.Message;
                     return false;
                 }
                 return true;                

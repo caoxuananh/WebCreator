@@ -20,7 +20,7 @@
                         <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="1" Grid.Column="1">                        
-                        <TextBox IsReadOnly="True" Height="100" Margin="2" DockPanel.Dock="Top" Name="TxtHomePath">C:\WebEditor\yoursite</TextBox>
+                        <TextBox TextWrapping="Wrap" IsReadOnly="True" Height="100" Margin="2" DockPanel.Dock="Top" Name="TxtHomePath" FontSize="14" FontStyle="Italic">C:\WebEditor\yoursite</TextBox>
                         <Button Name="BtnHomePath" DockPanel.Dock="Bottom" BorderThickness="1" Background="White" Margin="2" Height="100" Click="BtnHomePath_Click">
                             <TextBlock TextWrapping="Wrap" TextAlignment="Center" >Изменить где сохранить ваш сайт.</TextBlock>
                         </Button>
