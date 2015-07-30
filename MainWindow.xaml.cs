@@ -1,6 +1,10 @@
 ﻿using System.Windows;
 using System.IO;
 using System.Collections.ObjectModel;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.ComponentModel;
 
 namespace WPFWebCreator
 {
@@ -56,7 +60,7 @@ namespace WPFWebCreator
         }
 
         private void BtnPreview_Click(object sender, RoutedEventArgs e)
-        {
+        {                        
             // change theme (by change css properties)
 
             if (RBDark.IsChecked == true)
@@ -223,6 +227,81 @@ namespace WPFWebCreator
                     writer.WriteLine(p.UrlOfPic);           // write url of pic
                 }
             }
-        }        
+        }
+
+        private bool CreateFolder(string server, string user, string pass, string foldername)
+        {
+            // try to creato sub folder in server
+            try
+            {
+                // create ftp request
+                FtpWebRequest ftpRequest = (FtpWebRequest)FtpWebRequest.Create(server + "/" + foldername);
+                // make folder
+                ftpRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
+                ftpRequest.Credentials = new NetworkCredential(user, pass);
+                    
+                ftpRequest.KeepAlive = false;
+                ftpRequest.UseBinary = true;
+                ftpRequest.UsePassive = true;
+                // get response from server
+                FtpWebResponse resp = (FtpWebResponse)ftpRequest.GetResponse();
+                resp.Close();
+            }
+            catch (WebException ex)
+            {                
+                return false;
+            }
+            return true;
+        }
+
+        private void BtnUpload_Click(object sender, RoutedEventArgs e)
+        {            
+            if (TxtFTPAdr.Text == "" || TxtPwd.Password == "" || TxtWebAdr.Text == "" || TxtUsrName.Text == "")
+            {
+                MessageBox.Show("Проверять входить данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }                
+            else
+            {
+                //string ftpServer = "ftp://" + TxtFTPAdr.Text;
+                //string userName = "u917972091.testwebcreator";
+                //string password = "0159753";
+
+                string ftpServer = "ftp://" + TxtFTPAdr.Text;
+                string userName = TxtUsrName.Text;
+                string password = TxtPwd.Password;
+
+                string[] files = Directory.GetFiles(WebSite.HomePath);
+
+                if (TxtFolder.Text != "")
+                {
+                    CreateFolder(ftpServer, userName, password, TxtFolder.Text);
+                    ftpServer += "/" + TxtFolder.Text ;
+                }
+
+                using (System.Net.WebClient client = new System.Net.WebClient())
+                {
+                    // connect with ftp server, using username and password that input by user.
+                    client.Credentials = new System.Net.NetworkCredential(userName, password);
+                    // upload all file in home folder                
+                    foreach (string filename in files)
+                        client.UploadFile(ftpServer + "/" + new FileInfo(filename).Name, "STOR", filename);
+                }        
+                        
+                MessageBox.Show("Done!");
+                BtnViewOnline.IsEnabled = true;
+            }
+        }
+
+        private void BtnViewOnline_Click(object sender, RoutedEventArgs e)
+        {
+            string url;
+            if (TxtFolder.Text == "")
+                url = TxtWebAdr.Text + "index.html";
+            else
+                url = TxtWebAdr.Text + "/" + TxtFolder.Text + "/" + "index.html";
+
+            // call def. browser, navigate to url
+            System.Diagnostics.Process.Start(url);
+        }
     }
 }
