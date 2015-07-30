@@ -27,7 +27,7 @@ namespace WPFWebCreator
                 string url = WebSite.TempPath + TxtName.Text;
                 // create file if it isn't existed
                 if (!File.Exists(url))
-                    File.Create(url);                
+                    File.Create(url);
 
                 // if yes, add page to our list of page in WEBSITE.
                 WebSite.ListOfPage.Add(new Page() { FileName = TxtName.Text, PageTitle=TxtTitle.Text });                
@@ -48,7 +48,9 @@ namespace WPFWebCreator
                 string url = WebSite.TempPath + TxtName.Text;
                 // create file if it isn't existed
                 if (!File.Exists(url))
+                {
                     File.Create(url);
+                }
 
                 // if yes, edit info of page .
                 item.FileName = TxtName.Text;
@@ -64,7 +66,10 @@ namespace WPFWebCreator
             string url = WebSite.TempPath + TxtName.Text;
             // create file if it isn't existed
             if (!File.Exists(url))
-                File.Create(url);
+            { 
+                File.WriteAllText(url, WebSite.DefaultText);
+            }
+
             // open webeditor and load file for editing...
             WebEditor we = new WebEditor();
             we.Show();

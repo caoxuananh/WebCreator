@@ -14,12 +14,12 @@ namespace WPFWebCreator
 
         public WPFWebBrowser()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            
         }
 
         public void newWb(string url)
         {            
-
             if (webBrowser != null)
             {
                 webBrowser.LoadCompleted -= completed;
@@ -50,14 +50,14 @@ namespace WPFWebCreator
             {
                 webBrowser.Navigate(url);
             }
-
-            doc = webBrowser.Document as HTMLDocument;            
+            
+            doc = webBrowser.Document as HTMLDocument;
             Format.doc = doc;
         }
 
         private void completed(object sender, NavigationEventArgs e)
         {
-            doc = webBrowser.Document as HTMLDocument;            
+            doc = webBrowser.Document as HTMLDocument;
             doc.designMode = "On";
         }
     }

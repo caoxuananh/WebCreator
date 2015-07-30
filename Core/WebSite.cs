@@ -20,6 +20,7 @@ namespace WPFWebCreator
         public static string StyleHeader;       // style header
         public static string StyleFooter;       // style footer 
         public static string StyleRight;        // style right
+        public static string DefaultText;
         
         public static ObservableCollection<Page> ListOfPage;    // list of pages, its will be showed in middle of page, and add to menu link
         public static ObservableCollection<Product> ListOfProduct;  // list of products in product.html
@@ -56,34 +57,8 @@ namespace WPFWebCreator
             BodyRight = ReadBody(TempPath + "right.html");
             StyleRight = ReadStyle(TempPath + "right.html");
 
-            // Init list of page.
-            ListOfPage = new ObservableCollection<Page>();
-            // Read data is saved from file: site.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
-            {
-                int n = int.Parse(reader.ReadLine());           // read number of pages
-                for (int i = 0; i < n; i++)
-                {
-                    string str1 = reader.ReadLine();            // read filename
-                    string str2 = reader.ReadLine();            // read title                    
-                    WebSite.ListOfPage.Add(new Page(str2, str1));
-                }
-            }
-            // Init list of product
-            ListOfProduct = new ObservableCollection<Product>();
-            // Read data is saved from file: product.txt
-            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
-            {
-                int n = int.Parse(reader.ReadLine());       // read number of products
-                for (int i = 0; i < n; i++)
-                {
-                    string str1 = reader.ReadLine();        // read name
-                    string str2 = reader.ReadLine();        // read price
-                    string str3 = reader.ReadLine();        // read info
-                    string str4 = reader.ReadLine();        // read url of pic
-                    WebSite.ListOfProduct.Add(new Product() { Name = str1, Price = double.Parse(str2), Info = str3, UrlOfPic = str4 });
-                }
-            }
+            // set default text
+            DefaultText = "<HEAD><TITLE>new</TITLE><META content=\"text/html; charset=utf-8\" http-equiv=content-type>";
         }
 
         public static void WriteOpen(TextWriter writer)
@@ -192,6 +167,8 @@ namespace WPFWebCreator
         public static void GenerateSite()
         {
             string url, tempUlr;
+
+            Init();
 
             // build every page
             foreach (Page p in ListOfPage)

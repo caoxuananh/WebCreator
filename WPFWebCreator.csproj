@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Core\DialogBox.cs" />
     <Compile Include="Core\Format.cs" />
+    <Compile Include="Core\FtpUploader.cs" />
     <Compile Include="Core\Gui.cs" />
     <Compile Include="Core\HideScriptErrors.cs" />
     <Compile Include="Core\Initialisation.cs" />

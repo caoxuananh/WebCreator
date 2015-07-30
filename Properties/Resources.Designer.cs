@@ -83,7 +83,7 @@ namespace WPFWebCreator.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
         ///&lt;html&gt;&lt;head&gt;
-        ///&lt;meta content=&quot;text/html; charset=ISO-8859-1&quot; http-equiv=&quot;content-type&quot;&gt;&lt;title&gt;new&lt;/title&gt;
+        ///&lt;meta content=&quot;text/html; charset=utf-8&quot; http-equiv=&quot;content-type&quot;&gt;&lt;title&gt;xuananh&lt;/title&gt;
         ///
         ///&lt;style type=&quot;text/css&quot;&gt;
         ///p {

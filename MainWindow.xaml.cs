@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.IO;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -18,6 +19,36 @@ namespace WPFWebCreator
             InitializeComponent();
             // Generate default file and initiative some variable.
             WebSite.Init();
+
+            // Init list of page.
+            WebSite.ListOfPage = new ObservableCollection<Page>();
+            // Read data is saved from file: site.txt
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\site.txt"))
+            {
+                int n = int.Parse(reader.ReadLine());           // read number of pages
+                for (int i = 0; i < n; i++)
+                {
+                    string str1 = reader.ReadLine();            // read filename
+                    string str2 = reader.ReadLine();            // read title                    
+                    WebSite.ListOfPage.Add(new Page(str2, str1));
+                }
+            }
+            // Init list of product
+            WebSite.ListOfProduct = new ObservableCollection<Product>();
+            // Read data is saved from file: product.txt
+            using (TextReader reader = File.OpenText(@"C:\WebEditor\site\product.txt"))
+            {
+                int n = int.Parse(reader.ReadLine());       // read number of products
+                for (int i = 0; i < n; i++)
+                {
+                    string str1 = reader.ReadLine();        // read name
+                    string str2 = reader.ReadLine();        // read price
+                    string str3 = reader.ReadLine();        // read info
+                    string str4 = reader.ReadLine();        // read url of pic
+                    WebSite.ListOfProduct.Add(new Product() { Name = str1, Price = double.Parse(str2), Info = str3, UrlOfPic = str4 });
+                }
+            }
+
             // Bound data about Pages to List View "LvPage".            
             LvPage.ItemsSource = WebSite.ListOfPage;
             // Bound data about Product to List View "LvCategoue"                        
@@ -62,9 +93,7 @@ namespace WPFWebCreator
         private void BtnPreview_Click(object sender, RoutedEventArgs e)
         {           
             if (WebSite.HasIndexFile())
-            {
-                // Init 
-                WebSite.Init();
+            {                                
                 // create website
                 WebSite.GenerateSite();
 
@@ -219,100 +248,69 @@ namespace WPFWebCreator
             }
         }
 
-        private bool CreateFolder(string server, string user, string pass, string foldername)
-        {
-            // try to creato sub folder in server
-            try
-            {
-                // create ftp request
-                FtpWebRequest ftpRequest = (FtpWebRequest)FtpWebRequest.Create(server + "/" + foldername);
-                // make folder
-                ftpRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
-                ftpRequest.Credentials = new NetworkCredential(user, pass);
-                    
-                ftpRequest.KeepAlive = false;
-                ftpRequest.UseBinary = true;
-                ftpRequest.UsePassive = true;
-                // get response from server
-                FtpWebResponse resp = (FtpWebResponse)ftpRequest.GetResponse();
-                resp.Close();
-            }
-            catch (WebException ex)
-            {                
-                return false;
-            }
-            return true;
-        }
-
         private void BtnUpload_Click(object sender, RoutedEventArgs e)
         {
-            if (WebSite.HasIndexFile())
-            {
-                // Init 
-                WebSite.Init();
-                // generate site
-                WebSite.GenerateSite();                
-            }
-            else
+            // check if has index.html
+            if (!WebSite.HasIndexFile())
+            { 
                 MessageBox.Show("У вас нет index.html. Добавите index.html чтобы сайт работает нормально.");
-
-
+                return;
+            }
+                
+            // check if all text is filled
             if (TxtFTPAdr.Text == "" || TxtPwd.Password == "" || TxtWebAdr.Text == "" || TxtUsrName.Text == "")
             {
                 MessageBox.Show("Проверять входить данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }                
-            else
-            {
-                string ftpServer = "ftp://" + TxtFTPAdr.Text;
-                string userName = TxtUsrName.Text;
-                string password = TxtPwd.Password;
-
-                string[] files = Directory.GetFiles(WebSite.HomePath);
-                // init input
-                if (TxtFolder.Text != "")
-                {
-                    CreateFolder(ftpServer, userName, password, TxtFolder.Text);
-                    ftpServer += "/" + TxtFolder.Text ;
-                }
-
-                bool success = true;        // = false if no successful, other way = true
-                using (System.Net.WebClient client = new System.Net.WebClient())
-                {
-
-                    try
-                    {
-                        // connect with ftp server, using username and password that input by user.
-                        client.Credentials = new System.Net.NetworkCredential(userName, password);
-                        // upload all file in home folder                
-                        foreach (string filename in files)
-                            client.UploadFile(ftpServer + "/" + new FileInfo(filename).Name, "STOR", filename);
-                    }
-                    catch (WebException ex)
-                    {
-                        // show message of error
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        success = false;
-                    }                    
-                }
-                // show message of success
-                if (success)
-                {
-                    MessageBox.Show("Успешно выгрузить сайт!");
-                    BtnViewOnline.IsEnabled = true;
-                }                
+                return;
             }
+
+            // create uploader
+            FtpUploader.Init(TxtUsrName.Text, TxtPwd.Password, TxtFTPAdr.Text, TxtFolder.Text);
+            // begin upload    
+            PBPercent.Value = 0; // reset progress bar
+            // create work thread
+            BackgroundWorker wkr = new BackgroundWorker();
+            wkr.WorkerReportsProgress = true;
+            wkr.DoWork += wkr_DoWork;
+            wkr.ProgressChanged += wrk_ProgressChanged;
+            wkr.RunWorkerCompleted += wrk_RunWorkerCompleted;
+            wkr.RunWorkerAsync();
         }
 
         private void BtnViewOnline_Click(object sender, RoutedEventArgs e)
         {
             string url;
             if (TxtFolder.Text == "")
-                url = TxtWebAdr.Text + "index.html";
+                url = TxtWebAdr.Text + "/index.html";
             else
-                url = TxtWebAdr.Text + "/" + TxtFolder.Text + "/" + "index.html";
+                url = TxtWebAdr.Text + "/" + TxtFolder.Text + "/index.html";
 
             // call def. browser, navigate to url
             System.Diagnostics.Process.Start(url);
+        }        
+
+        void wkr_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string[] allfiles = Directory.GetFiles(WebSite.HomePath); // get folder to upload
+            WebSite.GenerateSite();
+            FtpUploader.CreateFolder();
+            int hundred = allfiles.Length;
+            for (int i = 1; i < allfiles.Length + 1; i++)
+            { 
+                FtpUploader.DoUpload(allfiles[i - 1]);
+                int percent = Convert.ToInt32((double)i / hundred * 100);
+                (sender as BackgroundWorker).ReportProgress(percent);                
+            }
+        }
+
+        void wrk_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            PBPercent.Value = e.ProgressPercentage;
+        }
+
+        void wrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("Upload done!");
         }
     }
 }
