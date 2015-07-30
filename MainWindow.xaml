@@ -19,7 +19,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="5*" />
                     </Grid.RowDefinitions>
-                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="13" HorizontalAlignment="Center">*Нажимать кнопки для редактировать шапку, правый блок или подвал сайта.</TextBlock>
+                    <WrapPanel Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Orientation="Horizontal">                        
                         <Label Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Стиль:" />
                         <RadioButton Name="RBDark" IsChecked="True" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Тёмный"/>
                         <RadioButton Name="RBLight" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Cветлый"/>

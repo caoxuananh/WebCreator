@@ -19,7 +19,7 @@ namespace WPFWebCreator
         {
             if (TxtName.Text == "" || TxtPrice.Text == "" || TxtUrlPic.Text == "")
                 // warn user to fill all field needed.
-                System.Windows.MessageBox.Show("You forgot enter some data.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Надо заполнить все поля, которые имеет \"*\" знак.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 // update item
@@ -36,7 +36,7 @@ namespace WPFWebCreator
         {
             if (TxtName.Text == "" || TxtPrice.Text == "" || TxtUrlPic.Text == "")
                 // warn user to fill all field needed.
-                System.Windows.MessageBox.Show("You forgot enter some data.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("Надо заполнить все поля, которые имеет \"*\" знак.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {              
                 // add new product to collection.

@@ -20,7 +20,7 @@ namespace WPFWebCreator
             // check if all field must be filled.
             if (TxtName.Text == "" || TxtTitle.Text == "")
                 // if not, show a error to users.
-                MessageBox.Show("You must enter all field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Надо заполнить все поля, которые имеет \"*\" знак.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 // make url by temp path + filename
@@ -41,7 +41,7 @@ namespace WPFWebCreator
             // check if all field must be filled.
             if (TxtName.Text == "" || TxtTitle.Text == "")
                 // if not, show a error to users.
-                MessageBox.Show("You must enter all field.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Надо заполнить все поля, которые имеет \"*\" знак.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 // make url by temp path + filename

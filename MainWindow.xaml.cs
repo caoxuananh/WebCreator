@@ -56,11 +56,11 @@ namespace WPFWebCreator
 
         private void BtnPage_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("You can manage your pages in <Pages Manager> tab.", "Infomation", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Для добавить страницы, нажими \"СТРАНИЦЫ\"", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnPreview_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             if (WebSite.HasIndexFile())
             {
                 // Init 
@@ -263,33 +263,43 @@ namespace WPFWebCreator
             }                
             else
             {
-                //string ftpServer = "ftp://" + TxtFTPAdr.Text;
-                //string userName = "u917972091.testwebcreator";
-                //string password = "0159753";
-
                 string ftpServer = "ftp://" + TxtFTPAdr.Text;
                 string userName = TxtUsrName.Text;
                 string password = TxtPwd.Password;
 
                 string[] files = Directory.GetFiles(WebSite.HomePath);
-
+                // init input
                 if (TxtFolder.Text != "")
                 {
                     CreateFolder(ftpServer, userName, password, TxtFolder.Text);
                     ftpServer += "/" + TxtFolder.Text ;
                 }
 
+                bool success = true;        // = false if no successful, other way = true
                 using (System.Net.WebClient client = new System.Net.WebClient())
                 {
-                    // connect with ftp server, using username and password that input by user.
-                    client.Credentials = new System.Net.NetworkCredential(userName, password);
-                    // upload all file in home folder                
-                    foreach (string filename in files)
-                        client.UploadFile(ftpServer + "/" + new FileInfo(filename).Name, "STOR", filename);
-                }        
-                        
-                MessageBox.Show("Done!");
-                BtnViewOnline.IsEnabled = true;
+
+                    try
+                    {
+                        // connect with ftp server, using username and password that input by user.
+                        client.Credentials = new System.Net.NetworkCredential(userName, password);
+                        // upload all file in home folder                
+                        foreach (string filename in files)
+                            client.UploadFile(ftpServer + "/" + new FileInfo(filename).Name, "STOR", filename);
+                    }
+                    catch (WebException ex)
+                    {
+                        // show message of error
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        success = false;
+                    }                    
+                }
+                // show message of success
+                if (success)
+                {
+                    MessageBox.Show("Успешно выгрузить сайт!");
+                    BtnViewOnline.IsEnabled = true;
+                }                
             }
         }
 
